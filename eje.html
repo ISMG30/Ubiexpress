@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Wialon Playground - Change unit icon</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+    
+    <script type="text/javascript" src="//hst-api.wialon.com/wsdk/script/wialon.js"></script>
+</head>
+<body>
+    Select unit: <select id="units"><option></option></select>
+    <div id="log"></div>
+  
+
+</body>
+
+</html>
+<script>
+    function msg(text) { $("#log").prepend(text + "<br/>"); }
+ 
+    function init(){
+       var sess = wialon.core.Session.getInstance();
+       var flags = wialon.item.Item.dataFlag.base | wialon.item.Unit.dataFlag.lastMessage;
+       renderer =wialon.core.Session.getInstance().getRenderer();
+       sess.loadLibrary("itemIcon");
+       sess.updateDataFlags(
+        [{type: "type", data: "avl_unit", flags: flags, mode:0}],
+        function (code) { // updateDataFlags callback
+    		if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
+            // get loaded 'avl_unit's items  
+	    	var units = sess.getItems("avl_unit");
+    		if (!units || !units.length){ msg("Units not found"); return; } // check if units found
+		    for (var i = 0; i< units.length; i++){ // construct Select object using found units
+			    var u = units[i]; // current unit in cycle
+			    // append option to select
+                $("#units").append("<option value='"+ u.getId() +"'>"+ u.getName()+ "</option>");
+                //$("#units").append("<option value='"+ units[i].getId() +"'>"+ units[i].getName()+ "</option>");
+            }
+            // bind action to select change event
+		    $("#units").change(getSelectedUnitInfo);
+	    }
+
+       );
+    }
+    function getSelectedUnitInfo(){
+        var val=$("#units").val();
+        if(!val) return;
+
+        var unit = wialon.core.Session.getInstance().getItems(val);
+        if(!unit){msg("Unit not found"); return;}
+        var text = "<div>'"+unit.getName()+"' selected. "; // get unit name
+    	var icon = unit.getIconUrl(32); // get unit Icon url
+        if(icon) text = "<img class='icon' src='"+ icon +"' alt='icon'/>"+ text; // add icon to message
+	    var pos = unit.getPosition(); // get unit position
+        if(pos){
+            var time=wialon.util.DateTime.formaTime(pos.t);
+            text += "<b>Last message</b> "+ time +"<br/>"+ // add last message time
+			"<b>Position</b> "+ pos.x+", "+pos.y +"<br/>"+ // add info about unit position
+			"<b>Speed</b> "+ pos.s; // add info about unit speed
+        // try to find unit location using coordinates 
+		wialon.util.Gis.getLocations([{lon:pos.x, lat:pos.y}], function(code, address){ 
+			if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
+			msg(text + "<br/><b>Location of unit</b>: "+ address+"</div>"); // print message to log
+		});
+	} else // position data not exists, print message
+		msg(text + "<br/><b>Location of unit</b>: Unknown</div>");
+    }
+
+// execute when DOM ready
+$(document).ready(function () {
+	//$("#change_icon_btn").click( changeIcon ); // bind action to button click
+	wialon.core.Session.getInstance().initSession("http://local.ubiexpress.net"); // init session
+    // For more info about how to generate token check
+    // http://sdk.wialon.com/playground/demo/app_auth_token
+	wialon.core.Session.getInstance().loginToken("2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA", "", // try to login
+	    function (code) { // login callback
+		if (code){ msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
+		msg("Logged successfully"); init(); // when login suceed then run init() function
+	});
+});
+</script>
+
