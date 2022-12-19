@@ -63,10 +63,11 @@ if(!isset($json['error'])){
           'flags' => 0x1 | 0x4
         );
        $ver= $wialon_api->core_search_item(json_encode($params));
+       
        $res =json_decode($ver, true);
        if(!isset($res['error'])){
 
-        echo $res['item']['nm'];
+       //echo $res['item']['nm'];
        }
        
 
@@ -93,7 +94,7 @@ if(!isset($json['error'])){
         'flags' => 0x1
       );
       
-      //echo $wialon_api->core_search_items(json_encode($params));
+      echo $wialon_api->core_search_items(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -116,15 +117,21 @@ if(!isset($json['error'])){
         'flags' => 0x1
       );
       
-       //echo $wialon_api->core_search_items(json_encode($params));
+       echo $wialon_api->core_search_items(json_encode($params));
       
       //$Unidad='C. ROJA SN-75-866';
       $params =array(
          //'nm'=>$Unidad,        
-        'id'=> '103',
+        'id'=> '302',
         'flags'=> 4611686018427387903         
       );
-      //echo $wialon_api->core_search_item(json_encode($params));
+     //echo $wialon_api->core_search_item(json_encode($params));
+     // $dato1 =json_decode($dato, true);
+      if(!isset($dato1['error'])){
+
+     // echo $dato1['item']['nm'];
+      }
+      
        
        //$dato= json_decode($resu, true);
        if(!isset($dato['error'])){
@@ -166,14 +173,14 @@ if(!isset($json['error'])){
         'sensores'=> 1,
         'flags"' => 0x01,
       );
-      echo $wialon_api->unit_calc_last_message(json_encode($params));
+     echo $wialon_api->unit_calc_last_message(json_encode($params));
 
       $params = array(
         'id'=>'302',
         'flags' => 8193
         
       );
-      echo $wialon_api->core_search_item(json_encode($params));
+     // echo $wialon_api->core_search_item(json_encode($params));
 
       $params = array(
         'itemId'=>'302',
@@ -187,7 +194,7 @@ if(!isset($json['error'])){
         'newValue'=> 0x000
         
       );
-      echo $wialon_api->unit_update_calc_flags(json_encode($params));
+     // echo $wialon_api->unit_update_calc_flags(json_encode($params));
 
       $params =array(
         'itemId'=> '302'

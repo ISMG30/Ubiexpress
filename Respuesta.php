@@ -12,8 +12,12 @@ if(!empty($_POST['opcion'])){
     ;
     break;
     case 2: {
-        $unidad= $_POST['unidad'];
-        $dato = $Ubi -> Unidad($unidad);
+      //  $unidad= $_POST['unidad'];
+        $dato = $Ubi ->NUnidad();
+    }
+    case 3:{
+         
+        $dato = $Ubi ->Combustible();
     }
    }
 }
