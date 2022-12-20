@@ -1,9 +1,9 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-$token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
-//$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
-$result = $wialon_api->login($token);
+//token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
+$result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
   echo  $json['user']['nm'];
@@ -85,7 +85,7 @@ if(!isset($json['error'])){
         'spec' => array(
             'itemsType' => 'avl_unit',
             'propName'=> 'sys_name',
-            'propValueMask' => 'TRAILER CASCADIA SN-88-974',
+            'propValueMask' => '*',
             'sortType' => 'sys_name'
         ),
         'force' => 1,
@@ -94,7 +94,7 @@ if(!isset($json['error'])){
         'flags' => 0x1
       );
       
-      echo $wialon_api->core_search_items(json_encode($params));
+     // echo $wialon_api->core_search_items(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -107,14 +107,14 @@ if(!isset($json['error'])){
         'spec' => array(
             'itemsType' => 'avl_resource',
             'propName'=> 'zones_library',
-            'propValueMask' => 'TRAILER CASCADIA SN-88-974',
+            'propValueMask' => '*bing*',
             'sortType' => 'zones_library',
             'propType' => 'propitemname'
         ),
         'force' => 1,
-        'from' => 4097,
-        'to'=>0,
-        'flags' => 0x1
+        'from' => 0,
+        'to'=> 1,
+        'flags' =>4097
       );
       
        echo $wialon_api->core_search_items(json_encode($params));
@@ -173,7 +173,7 @@ if(!isset($json['error'])){
         'sensores'=> 1,
         'flags"' => 0x01,
       );
-     echo $wialon_api->unit_calc_last_message(json_encode($params));
+    // echo $wialon_api->unit_calc_last_message(json_encode($params));
 
       $params = array(
         'id'=>'302',
@@ -201,7 +201,19 @@ if(!isset($json['error'])){
         //'password'=> 'PRUEBAS12',
         //'operateAs' => 'POR',
        );
-     // echo $wialon_api->unit_get_fuel_settings(json_encode($params));
+      //echo $wialon_api->unit_get_fuel_settings(json_encode($params));
+
+      $params= array(
+            'itemId'=> '302',	
+					  'consSummer' => '8.88',
+					  'consWinter'=>'7.88',
+					  'winterMonthFrom' => '11',
+					  'winterDayFrom' => '20',
+					  'winterMonthTo'=>'11',
+					  'winterDayTo'=>'20'
+      );
+      //echo $wialon_api->unit_update_fuel_rates_params(json_encode($params));
+
 
         $params =array(
         'itemId'=> '302',
@@ -213,12 +225,12 @@ if(!isset($json['error'])){
 
       $params =array(
         'itemId'=> '302',
-        'idling' => '3',
-        'urban' =>'10',
-        'suburban'=> '10',
-        'loadCoef'=>'6',
+        'idling' => 2,
+        'urban' => 10,
+        'suburban'=> 7,
+        'loadCoef'=> 0,
       );
-      //echo $wialon_api->unit_update_fuel_math_params(json_encode($params)); 
+      echo $wialon_api->unit_update_fuel_math_params(json_encode($params)); 
 
       //contador de kilometraje
       $params =array(
@@ -244,10 +256,10 @@ if(!isset($json['error'])){
       );
       //echo $wialon_api->unit_update_mileage_counter(json_encode($params));
       $params =array(
-        'token'=>'2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA', 
-        'password' => 'PRUEBAS12',
-		//'operateAs'=>  'PROGRAMACION',
-        'fl' => 1
+        'token'=> '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA', 
+        //'password' => 'PRUEBAS12',
+		'operateAs'=>  'PROGRAMACION',
+        'fl' => 0x1
       );
       //echo $wialon_api->token_login(json_encode($params));
 

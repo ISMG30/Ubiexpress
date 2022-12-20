@@ -7,17 +7,26 @@ if(!empty($_POST['opcion'])){
    
    switch($opcion){
     case 1: {
-          $dato = $Ubi->unidades();
+          $dato = $Ubi->login();
     }
     ;
     break;
     case 2: {
-      //  $unidad= $_POST['unidad'];
-        $dato = $Ubi ->NUnidad();
+        $unidad= $_POST['unidad'];
+        $dato = $Ubi ->Usuarios($unidad);
+        
     }
+    ;
+    break;
     case 3:{
-         
-        $dato = $Ubi ->Combustible();
+        $unidad= $_POST['unidad'];
+        $dato = $Ubi ->NUnidad($unidad);
+    }
+    ;
+    break;
+    case 4: {
+        $unidad = $_POST['unidad'];
+        $dato = $Ubi -> Combustible($unidad);
     }
    }
 }

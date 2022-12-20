@@ -13,12 +13,12 @@ class Peticion
    }
 
   //Consultar Todas las Venta del Dia
-  function consultarVentasDia($fecha)
+  function consultarVentasDia($unidad)
   {
     $ch = curl_init();
     $post = [
-      'opcion' => '5',
-      'fecha' => $fecha
+      'opcion' => '2',
+      'fecha' => $unidad
     ];
     $url = $this->urlApi;
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -28,6 +28,7 @@ class Peticion
     $response = curl_exec($ch);
     $json = json_decode($response, true);
     return $json;
+    echo $json;
   }
   
 }
