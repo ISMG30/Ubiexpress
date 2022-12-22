@@ -29,7 +29,8 @@ class Prueba {
             }else{
                 echo "error";
             }
-            
+              
+          
         }
     }
 
@@ -58,9 +59,9 @@ class Prueba {
               $dato = $wialon_api->core_search_items(json_encode($params));
               $dato1 =json_decode($dato, true);
               if(!isset($dato1['error'])){
-                //echo  $dato1 ['searchSpec']['propValueMask'];
-                echo $dato1['items']['0']['nm'] ,'/n';
-                echo $dato1['items']['0']['id'];
+                echo  $dato1 ['searchSpec']['propValueMask'];
+                //echo $dato1['items']['0']['nm'] ,'/n';
+               // echo $dato1['items']['0']['id'];
               } 
               
               
@@ -94,12 +95,12 @@ class Prueba {
               if(!isset($dato1['error'])){
                 //echo  $dato1 ['searchSpec']['propValueMask'];
                 //echo $dato1['items']['0']['nm'] ,'/n';
-                $var = $dato1['items']['0']['id'];
+                $id = $dato1['items']['0']['id'];
               } 
            
         $params =array( 
                   
-            'id'  => $var,
+            'id'  => $id,
            'flags'=> 4611686018427387903	 
          );
          $dato = $wialon_api->core_search_item(json_encode($params));
@@ -118,6 +119,7 @@ class Prueba {
         // echo $wialon_api->core_search_item(json_encode($params));
         }
      }
+     
      function Combustible($unidad)
      {
 
@@ -127,8 +129,28 @@ class Prueba {
         $json =json_decode($result, true);
         if(!isset($json['error']))
         {
+          $params = array(
+            'spec' => array(
+                'itemsType' => 'avl_unit',
+                'propName'=> 'sys_name',
+                'propValueMask' => $unidad,
+                'sortType' => 'sys_name'
+            ),
+            'force' => 1,
+            'from' => 0,
+            'to'=>0,
+            'flags' => 0x1
+          );
+          //echo $wialon_api->core_search_items(json_encode($params));
+          $dato = $wialon_api->core_search_items(json_encode($params));
+          $dato1 =json_decode($dato, true);
+          if(!isset($dato1['error'])){
+            //echo  $dato1 ['searchSpec']['propValueMask'];
+            echo $dato1['items']['0']['nm'] ,'/n';
+            $id=$dato1['items']['0']['id'];
+          } 
             $params = array(
-                'unitId'=> '302',
+                'unitId'=> $id,
                 'sensores'=> 1,
                 'flags"' => 0x02
               );

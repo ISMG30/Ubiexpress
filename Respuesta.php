@@ -8,12 +8,15 @@ if(!empty($_POST['opcion'])){
    switch($opcion){
     case 1: {
           $dato = $Ubi->login();
+          return $dato;
+         
     }
     ;
     break;
     case 2: {
         $unidad= $_POST['unidad'];
         $dato = $Ubi ->Usuarios($unidad);
+        
         
     }
     ;

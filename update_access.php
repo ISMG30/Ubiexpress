@@ -1,20 +1,20 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-//token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
-$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
+//$token = '9184acef7671d237a45f10b8cf35cb44B003CD0D9E5E9E082307869551D96DB4D5E653C8';
+$result = $wialon_api->login('adminhidalgo','Hidalgo99');
 $result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
-  echo  $json['user']['nm'];
+  //echo  $json['user']['nm'];
    $userId = $json['user']['id'];
-    echo "<br>$userId<br>";
+    //echo "<br>$userId<br>";
     
    //echo $result;
     
-   //echo $json['eid'];
+   echo $json['eid'];
     //print_r($json['user']);
-   
+    //echo $wialon_api->core_get_hw_types();
      $params = array(
         'itemId' => '', 
         'id' => '', 
@@ -117,32 +117,40 @@ if(!isset($json['error'])){
         'flags' =>4097
       );
       
-       echo $wialon_api->core_search_items(json_encode($params));
+      // echo $wialon_api->core_search_items(json_encode($params));
       
       //$Unidad='C. ROJA SN-75-866';
       $params =array(
          //'nm'=>$Unidad,        
         'id'=> '302',
-        'flags'=> 4611686018427387903         
+        'flags'=> 4611686018427387903	
       );
      //echo $wialon_api->core_search_item(json_encode($params));
-     // $dato1 =json_decode($dato, true);
-      if(!isset($dato1['error'])){
+     
+     $params =array(
+      //'nm'=>$Unidad,        
+     'id'=> '302',
+     'sens'=>array(
+      'id' => '1',
+      'n' => 'COMBUSTIBLE',
+      't' => 'fuel level',
+      'd' => 'NIVEL COMBUSTIBLE|0:0:20:10:40:20:60:30:80:40:100:50:120:60:140:70:160:80:180:90:200:100',
+      'm' => '1',
+      'p'=>'adc1',
+      'f' => '0',
+      'c' =>'',
+      'vt' => 0,
+      'vs'=> '0',
+      'tbl' => array(
+         'x' => 0,
+         'a' => 0.5,
+         'b'=> 0
+      )
 
-     // echo $dato1['item']['nm'];
-      }
+     )       
+   );
+  // echo $wialon_api->core_search_item(json_encode($params));
       
-       
-       //$dato= json_decode($resu, true);
-       if(!isset($dato['error'])){
-       //$ver= $dato['items']['id'];
-       //echo $ver;
-       //echo $resu;}
-       }else{
-        //echo "error";
-       }
-      // $reul= var_dump(json_decode($resu,true));
-      // echo $reul['nm'];
       // Datos el Combustible
       $params = array(
         'itemId'=>'302',
@@ -177,10 +185,9 @@ if(!isset($json['error'])){
 
       $params = array(
         'id'=>'302',
-        'flags' => 8193
-        
+        'flags' => 0x1 | 0x4
       );
-     // echo $wialon_api->core_search_item(json_encode($params));
+      //echo $wialon_api->core_search_item(json_encode($params));
 
       $params = array(
         'itemId'=>'302',
@@ -197,9 +204,10 @@ if(!isset($json['error'])){
      // echo $wialon_api->unit_update_calc_flags(json_encode($params));
 
       $params =array(
-        'itemId'=> '302'
+        'itemId'=> '302',
         //'password'=> 'PRUEBAS12',
         //'operateAs' => 'POR',
+        'flags'=>0x02
        );
       //echo $wialon_api->unit_get_fuel_settings(json_encode($params));
 
@@ -219,18 +227,18 @@ if(!isset($json['error'])){
         'itemId'=> '302',
         //'password'=> 'PRUEBAS12',
         //'operateAs' => 'POR',
-        'calcTypes' =>6
+        'calcTypes' =>0x1
       );
      //echo $wialon_api->unit_update_fuel_calc_types(json_encode($params));
 
       $params =array(
-        'itemId'=> '302',
+        'itemId'=> '2',
         'idling' => 2,
         'urban' => 10,
         'suburban'=> 7,
         'loadCoef'=> 0,
       );
-      echo $wialon_api->unit_update_fuel_math_params(json_encode($params)); 
+     // echo $wialon_api->unit_update_fuel_math_params(json_encode($params)); 
 
       //contador de kilometraje
       $params =array(
@@ -274,6 +282,21 @@ if(!isset($json['error'])){
       );
      //echo $wialon_api->unit_update_fuel_rates_params($params);
 
+     $params = array(
+      'itemId' => 19327369763,	
+      'flags'=> 7754,
+      'ignoreStayTimeout'=> 20,
+      'minFillingVolume'=> 20,
+      'minTheftTimeout'=> 0,
+      'minTheftVolume'=> 10,
+      'filterQuality'=> 5,
+      'fillingsJoinInterval'=> 300,
+      'theftsJoinInterval'=> 300,
+      'extraFillingTimeout'=> 200
+    );
+
+   //echo $wialon_api->unit_update_fuel_level_params($params);
+
        // RUTAS
        $params =array(
         'itemId' =>'302', 
@@ -293,7 +316,69 @@ if(!isset($json['error'])){
        }
        //echo $wialon_api->route_get_round_data($params);
 
-     
+     $params = array(
+        'reportResourceId' => 163266,
+        'reportTemplateId' => 10,
+        'reportObjectId' =>34868,
+        'reportObjectSecId' => 0,
+        'interval' => array(
+            'from' => 1357938000,
+            'to' =>1358715599,
+            'flags' => 0
+        )
+     );
+    //echo $wialon_api->report_exec_report(json_encode($params));
+    $params = array(
+      'attachmentIndex' => 1,
+      'action' => 0,
+      'width' => 600,
+      'height' => 300,
+      'autoScaleY' => 0,
+      'pixelFrom' => 0,
+      'pixelTo' =>300,
+      'flags' => 513
+      
+   );
+  //echo $wialon_api->report_get_result_chart(json_encode($params));
+  $params = array(
+    'width' => 700,
+    'height'=> 800
+  );
+  //echo $wialon_api->report_get_result_map(json_encode($params));
+  $params =array(
+    'attachmentIndex' =>1,
+    'width' =>600,
+    'useCrop' => 1,
+    'cropBegin' =>2,
+    'cropEnd'=>3
+  );
+  //echo $wialon_api->report_render_json(json_encode($params));
+  $params = array(
+    'format'=> 2,
+    'pageOrientation' =>'portrait',
+    'pageSize' => 'a4',
+    'pageWidth' => 0,
+    'coding' => 'utf8',
+    'delimiter' => 'comma',
+    'headings' => 0,
+    'compress' =>0,
+    'attachMap' =>0,
+    'extendBounds' =>0,
+    'hideMapBasis' =>0,
+    'outputFileName' => 'Online_report'
+
+  );
+  echo $wialon_api->report_export_result(json_encode($params));
+  $params=array();
+  echo $wialon_api->report_cleanup_result(json_encode($params));
+
+  $params = array(
+    'itemId'=>'302',
+    'col'=> [10]
+    
+  );
+  echo $wialon_api->report_get_report_data(json_encode($params));
+
 $wialon_api->logout();
 }else{
     echo WialonError::error($json['error']);

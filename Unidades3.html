@@ -9,7 +9,7 @@
 </head>
 <body>
 
-Select unit: <select id="units"><option></option></select>
+<p>Select unit: <span id="units"></span></p>
 <div id="log"></div>
 	<form action="Respuesta.php" method="post">
 		<h2> Usuario</h2>
@@ -29,7 +29,7 @@ Select unit: <select id="units"><option></option></select>
 	<form action="Respuesta.php" method="post">
 		<h1> Co</h1>
 		<div><input type="hidden" name="opcion" value="3"></div>
-		<div>Unidad<input type="text" name="unidad" value="Jugador"></div>
+		<div>Unidad<input type="text" name="unidad" value="C. ROJA SN-75-866"></div>
 		<!--div>Unidades<select type="textbox" name="unidad"></div-->
 		<div><button class="subit">OBTENER JSON</button>
 		</div>
@@ -46,7 +46,8 @@ Select unit: <select id="units"><option></option></select>
 		type: "POST",
 		data: 'user'
 
-	})
+	});
+	
 
     </script>
 	</body>

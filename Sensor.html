@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Wialon Playground - Change unit icon</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="//hst-api.wialon.com/wsdk/script/wialon.js"></script>
+</head>
+<body>
+<style>
+div{vertical-align:top;}
+td{padding:0px 10px;}
+.wrap{display:inline-block; max-height:200px; overflow:auto;}
+.odd{background:#EEE;}
+#log{border: 1px solid #c6c6c6;}
+
+</style>
+
+
+<div class="wrap"><table id="units_table"></table></div>
+<div style="display:inline-block;">
+	Select unit: <select id="unit"><option></option></select>
+	<input type="file" id="upload_icon" name="upload_icon"/>
+	<input type="button" value="Change icon" id="change_icon_btn"/>
+	<div id="log"></div>
+</div>
+
+
+
+<script type="text/javascript">
+// Print message to log
+function msg(text) { $("#log").prepend(text + "<br/>"); }
+
+function init() { // Execute after login succeed
+	var sess = wialon.core.Session.getInstance(); // get instance of current Session
+	// flags to specify what kind of data should be returned
+	var flags = wialon.item.Item.dataFlag.base | wialon.item.Item.dataFlag.image;
+	sess.loadLibrary("itemIcon"); // load Icon Library
+	
+	sess.updateDataFlags( // load items to current session
+	[{type: "type", data: "avl_unit", flags: flags, mode: 0}], // Items specification
+		function (code) { // updateDataFlags callback
+			if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code 
+            // get loaded 'avl_unit's items with edit icons access 
+			var units = wialon.util.Helper.filterItems(sess.getItems("avl_unit"),
+				wialon.item.Item.accessFlag.editImage); 
+			if (!units || !units.length){ msg("No units found"); return; } // check if units found
+				
+			for (var i=0; i< units.length; i++) { // construct objects using found units
+				var id = units[i].getId(); // get selected unit id
+                // add unit row to table
+				$("#units_table").append("<tr"+ (i%2==0?" class='odd' ":"") +"><td>"+ (i+1) +"</td>"+
+				"<td><img id='icon_"+ id +"'src='"+ units[i].getIconUrl() +"' alt='icon'/></td>"+
+				"<td>" + units[i].getName() + "</td></tr>");
+				// append option to select
+				$("#unit").append("<option value='"+ units[i].getId() +"'>"+ units[i].getName() +"</option>");
+                // bind action to 'changeIcon' event
+				units[i].addListener("changeIcon", iconUpdated);
+			}
+	});
+}
+
+function iconUpdated(evt){ //'changeIcon' event action
+	var unit = evt.getTarget(); // get unit
+	$("#icon_"+unit.getId()).attr("src", unit.getIconUrl()); //set new icon
+	msg("'"+ unit.getName() +"' icon updated"); // print message
+}
+
+function changeIcon(){ // change icon to selected unit
+	var unit = $("#unit").val(); // get selected unit id
+	if(!unit){ msg("Select unit"); return;} // exit if unit not selected
+	if(!$("#upload_icon").val()){ msg("Select icon"); return;} // exit if icon not selected
+	
+	var u = wialon.core.Session.getInstance().getItem(unit); // get unit by id
+	// update icon
+	u.updateIcon( $("#upload_icon").get(0), function(code){ // update icon callback
+		if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // if error
+	});
+}
+
+// execute when DOM ready
+$(document).ready(function () {
+	$("#change_icon_btn").click( changeIcon ); // bind action to button click
+	wialon.core.Session.getInstance().initSession("https://local.ubiexpress.net"); // init session
+    // For more info about how to generate token check
+    // http://sdk.wialon.com/playground/demo/app_auth_token
+	wialon.core.Session.getInstance().loginToken("2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA", "", // try to login
+	    function (code) { // login callback
+		if (code){ msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
+		msg("Logged successfully"); init(); // when login suceed then run init() function
+	});
+});
+
+</script>
+</body>
+</html>
