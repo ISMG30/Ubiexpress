@@ -88,7 +88,7 @@
 		*/
 		public function login($token) {
 			$data = array(
-				'token' => urlencode('9184acef7671d237a45f10b8cf35cb44B003CD0D9E5E9E082307869551D96DB4D5E653C8'),
+				'token' => urlencode($token),
 			);
 
 			$result = $this->token_login(json_encode($data));

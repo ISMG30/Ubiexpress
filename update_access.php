@@ -1,18 +1,20 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-//$token = '9184acef7671d237a45f10b8cf35cb44B003CD0D9E5E9E082307869551D96DB4D5E653C8';
-$result = $wialon_api->login('adminhidalgo','Hidalgo99');
-$result = $wialon_api->login($result);
+$token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+$result = $wialon_api->login($token);
+//$result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
   //echo  $json['user']['nm'];
-   $userId = $json['user']['id'];
-    //echo "<br>$userId<br>";
-    
+   //echo $userId = $json['user']['id'];
+    //echo "<br>$userId<br>"; 
    //echo $result;
+
+  // echo $wialon_api->core_get_account_data('{"type":1}');
+   //echo $wialon_api->core_search_item('{"id":440,"flags": 0x1}');
     
-   echo $json['eid'];
+   //echo $json['eid'];
     //print_r($json['user']);
     //echo $wialon_api->core_get_hw_types();
      $params = array(
@@ -23,7 +25,7 @@ if(!isset($json['error'])){
        //echo $wialon_api->core_create_user(json_encode($params));
        //echo $wialon_api->core_get_hw_types();
        
-       $params =array(
+       /*$params =array(
         'creatorId' => $userId,
         'name' => 'C. ROJA SN-75-866',
         'hwTypeId' =>'165',
@@ -39,26 +41,26 @@ if(!isset($json['error'])){
       //echo $wialon_api->get_fuel_settings(json_encode($params));
 
 
-     /*$params =array(
+     $params =array(
            'itemId' => $resource['unit']['id'],
            'app' => '1600563642_162',
            'password' => 'PRUEBAS12',  
            'dataFlags' => 5
-         );*/
+         );
       //echo $wialon_api->core_create_user(json_encode($params));
       //echo  $wialon_api->account_create_account(json_encode($params));
       //echo $wialon_api->update_command_definition(json_encode($params));
-
-    $params = array(
+*/
+    /*$params = array(
         'user' => 'PROGRAMACION',
         'itemId' => '',
         'accoessMask' => 0x10
         
         );
-      // echo $wialon_api->user_update_item_access(json_encode($params));
+      echo $wialon_api->user_update_item_access(json_encode($params));*/
 
 
-    $params=array(
+ /*   $params=array(
           'id'=>$userId,
           'flags' => 0x1 | 0x4
         );
@@ -76,7 +78,7 @@ if(!isset($json['error'])){
          'name'=> 'PROGRMACION',
          'password' => 'PRUEBAS12',
          'dataFlasgs' => 5
-       );
+       );*/
        //echo $wialon_api->core_create_user(json_encode($params));
 
        // Busca la Unidades que se tiene
@@ -322,12 +324,12 @@ if(!isset($json['error'])){
         'reportObjectId' =>34868,
         'reportObjectSecId' => 0,
         'interval' => array(
-            'from' => 1357938000,
-            'to' =>1358715599,
+            'from' => 1671721201,
+            'to' =>1671742801,
             'flags' => 0
         )
      );
-    //echo $wialon_api->report_exec_report(json_encode($params));
+     //echo $wialon_api->report_exec_report(json_encode($params));
     $params = array(
       'attachmentIndex' => 1,
       'action' => 0,
@@ -368,16 +370,46 @@ if(!isset($json['error'])){
     'outputFileName' => 'Online_report'
 
   );
-  echo $wialon_api->report_export_result(json_encode($params));
-  $params=array();
-  echo $wialon_api->report_cleanup_result(json_encode($params));
-
-  $params = array(
-    'itemId'=>'302',
-    'col'=> [10]
+ // echo $wialon_api->report_export_result(json_encode($params));
+  $params=array(
     
   );
-  echo $wialon_api->report_get_report_data(json_encode($params));
+  //echo $wialon_api->report_cleanup_result(json_encode($params));
+  //echo $wialon_api-> report_get_report_status(json_encode($params));
+  $params = array(
+    'itemId'=>302,
+    'col' => [10],
+    'flags' => 0x00008000
+    
+  );
+  //echo $wialon_api->report_get_report_data(json_encode($params));
+  $params = array(
+    'tableIndex' => 0,
+    'indexFrom' =>0,
+    'indexTo' =>0
+  );
+  //echo $wialon_api->report_get_result_rows(json_encode($params));
+  $params = array (
+    'reportResourceId'=>163266,
+    'reportTemplateId'=>10,
+    'reportObjectId'=>34868,
+    'reportObjectSecId'=>0,
+    'reportObjectIdList'=>0,
+    'interval'=> array(
+        'from'=>1671721201,
+        'to'=>1671742801,
+        'flags'=>0
+    ),
+    'remoteExec'=>0,
+    'reportTemplate'=>0
+  );
+ echo $wialon_api->report_exec_report(json_encode($params));
+
+ $params= array(
+  'id'=>302,
+  'flags'=>	 0x00000100
+ );
+ echo $wialon_api->core_search_item(json_encode($params));
 
 $wialon_api->logout();
 }else{
