@@ -5,6 +5,7 @@
     <title>Wialon Playground - Units on map</title>
     <script type="text/javascript" src="//code.jquery.com/jquery-latest.min.js"></script>
     <script type="text/javascript" src="//hst-api.wialon.com/wsdk/script/wialon.js"></script>
+	<script type="text/javascript" src="https://hst-api.wialon.com/wsdk/script/wialon.js?callback=someFunc"></script>
 </head>
 <body>
 <style>
@@ -36,8 +37,8 @@ function init() { // Execute after login succeed
 	var sess = wialon.core.Session.getInstance(); // get instance of current Session
 	// specify what kind of data should be returned
 	var flags = wialon.item.Item.dataFlag.base | wialon.item.Unit.dataFlag.lastMessage;
-
-	sess.loadLibrary("itemIcon"); // load Icon Library 
+	            
+	sess.loadLibrary("itemIcon"); //load Icon Library 
 	sess.updateDataFlags( // load items to current session
 	    [{type: "type", data: "avl_unit", flags: flags,mode: 0}], // Items specification
 	    function (code) { // updateDataFlags callback
