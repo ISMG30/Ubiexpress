@@ -84,8 +84,8 @@ function getTemplates(){ // get report templates and put it in select list
 function executeReport(){ // execute selected report
     // get data from corresponding fields
 	var id_res=$("#res").val(), id_templ=$("#templ").val(), id_unit=$("#units").val(), time=$("#interval").val();
-	if(!id_res){ msg("Select resource"); return;} // exit if no resource selected
-	if(!id_templ){ msg("Select report template"); return;} // exit if no report template selected
+	//if(!id_res){ msg("Select resource"); return;} // exit if no resource selected
+	//if(!id_templ){ msg("Select report template"); return;} // exit if no report template selected
 	if(!id_unit){ msg("Select unit"); return;} // exit if no unit selected
 
 	var sess = wialon.core.Session.getInstance(); // get instance of current Session

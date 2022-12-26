@@ -127,7 +127,7 @@ if(!isset($json['error'])){
         'id'=> '302',
         'flags'=> 4611686018427387903	
       );
-     //echo $wialon_api->core_search_item(json_encode($params));
+    // echo $wialon_api->core_search_item(json_encode($params));
      
      $params =array(
       //'nm'=>$Unidad,        
@@ -183,7 +183,7 @@ if(!isset($json['error'])){
         'sensores'=> 1,
         'flags"' => 0x01,
       );
-    // echo $wialon_api->unit_calc_last_message(json_encode($params));
+    //echo $wialon_api->unit_calc_last_message(json_encode($params));
 
       $params = array(
         'id'=>'302',
@@ -258,17 +258,18 @@ if(!isset($json['error'])){
 		     'timeTo'=>  1, 
 		    'fullJson' => 1
       );
-      //echo $wialon_api->route_get_all_rounds(json_encode($params));
+     // echo $wialon_api->route_get_all_rounds(json_encode($params));
 
       $params =array(
         'itemId'=> '302',
         'newValue' => 100
       );
       //echo $wialon_api->unit_update_mileage_counter(json_encode($params));
+
       $params =array(
         'token'=> '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA', 
-        //'password' => 'PRUEBAS12',
-		'operateAs'=>  'PROGRAMACION',
+         //'password' => 'PRUEBAS12',
+	    	'operateAs'=>  'PROGRAMACION',
         'fl' => 0x1
       );
       //echo $wialon_api->token_login(json_encode($params));
@@ -285,7 +286,7 @@ if(!isset($json['error'])){
      //echo $wialon_api->unit_update_fuel_rates_params($params);
 
      $params = array(
-      'itemId' => 19327369763,	
+      'itemId' => '302',	
       'flags'=> 7754,
       'ignoreStayTimeout'=> 20,
       'minFillingVolume'=> 20,
@@ -297,7 +298,7 @@ if(!isset($json['error'])){
       'extraFillingTimeout'=> 200
     );
 
-   //echo $wialon_api->unit_update_fuel_level_params($params);
+   echo $wialon_api->unit_update_fuel_level_params(json_encode($params));
 
        // RUTAS
        $params =array(
@@ -355,6 +356,7 @@ if(!isset($json['error'])){
     'cropEnd'=>3
   );
   //echo $wialon_api->report_render_json(json_encode($params));
+
   $params = array(
     'format'=> 2,
     'pageOrientation' =>'portrait',
@@ -371,6 +373,8 @@ if(!isset($json['error'])){
 
   );
  // echo $wialon_api->report_export_result(json_encode($params));
+
+
   $params=array(
     
   );
@@ -403,13 +407,13 @@ if(!isset($json['error'])){
     'remoteExec'=>0,
     'reportTemplate'=>0
   );
- echo $wialon_api->report_exec_report(json_encode($params));
+ //echo $wialon_api->report_exec_report(json_encode($params));
 
  $params= array(
   'id'=>302,
   'flags'=>	 0x00000100
  );
- echo $wialon_api->core_search_item(json_encode($params));
+ //echo $wialon_api->core_search_item(json_encode($params));
 
 $wialon_api->logout();
 }else{
