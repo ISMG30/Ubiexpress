@@ -135,7 +135,7 @@ class Prueba {
      
 
 
-     function Combustible($unidad)
+     function Combustible()
      {
         $wialon_api = new Wialon();
         $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
@@ -175,22 +175,24 @@ class Prueba {
               $ver = json_decode($dato, true);
               if(!isset($ver['error']))
               { 
-
+               
                 if( $ver && ['1'])
                  {
                    $comb = $ver['1']; // Combustible 
-                   $kmt=  $ver['2']; //kilometraje 
-                 }
+                   $kmh =  $ver['2']; // kilometraje 
+                 
                 
                  $usuario = array(
                   'id' => $id,
                   'user'=> $user,
                   'km' => $km,
                   'Combustible' => $comb,
-                  'Km Tiempo' => $kmt
+                  'Km/h Tiempo' => $kmh
                   );
+                 
                   echo json_encode($usuario); 
-             }
+                }
+              }
            }      
              
           }
@@ -239,8 +241,7 @@ class Prueba {
              $dato = $wialon_api->unit_calc_last_message(json_encode($params));
              $ver = json_decode($dato, true);
              if(!isset($ver['error'])){
-               
-              
+            
                 $comb = $ver['1']; // Combustible 
                 $kmt=  $ver['2']; //kilometraje
               
