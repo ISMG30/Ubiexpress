@@ -93,10 +93,10 @@ if(!isset($json['error'])){
         'force' => 1,
         'from' => 0,
         'to'=>0,
-        'flags' => 0x1
+        'flags' => 4611686018427387903
       );
       
-     // echo $wialon_api->core_search_items(json_encode($params));
+      echo $wialon_api->core_search_items(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -298,7 +298,7 @@ if(!isset($json['error'])){
       'extraFillingTimeout'=> 200
     );
 
-   echo $wialon_api->unit_update_fuel_level_params(json_encode($params));
+   //echo $wialon_api->unit_update_fuel_level_params(json_encode($params));
 
        // RUTAS
        $params =array(
