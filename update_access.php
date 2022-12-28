@@ -96,7 +96,7 @@ if(!isset($json['error'])){
         'flags' => 4611686018427387903
       );
       
-      echo $wialon_api->core_search_items(json_encode($params));
+     // echo $wialon_api->core_search_items(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -414,6 +414,24 @@ if(!isset($json['error'])){
   'flags'=>	 0x00000100
  );
  //echo $wialon_api->core_search_item(json_encode($params));
+$array0 =array(
+ $array =array(
+   'id'=> 302,
+   'user'=>'C. ROJA SN-75-866',
+   'km'=>'29001',
+   'Combustible' => '56.5',
+   'Km/h'=>0
+ ),
+ $array1 =array(
+  'id'=> 401,
+  'user'=>'C. ROJA SN-75-862',
+  'km'=>'27689',
+  'Combustible' => '56',
+  'Km/h'=>0
+)
+);
+ $final = array_merge($array, $array1);
+ echo json_encode($array);
 
 $wialon_api->logout();
 }else{

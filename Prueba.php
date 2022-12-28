@@ -118,7 +118,7 @@ class Prueba {
          $dato1 =json_decode($dato, true);
          if(!isset($dato1['error'])){
 
-           $com = $dato1['item']['sens']['1']['c'];
+           $com = array($dato1['item']['sens']['1']['c']);
            $var =  $dato1['item']['nm'];
             if( $var && $com)
            {
@@ -130,6 +130,7 @@ class Prueba {
            }
          }
         // echo $wialon_api->core_search_item(json_encode($params));*/
+         
         }
      }
      
@@ -156,16 +157,22 @@ class Prueba {
             'flags' => 4611686018427387903
           );    
           $dato=$wialon_api->core_search_items(json_encode($params));
-          $dato1 =json_decode($dato, true);
+          $dato1 = json_decode($dato, true);
           if(!isset($dato1['error'])){
             $var = $dato1['items'];
 
            for($i=0; $i<count($var); $i++)
-            {  
-                $id=$dato1['items'][$i]['id'];
+            {  $id = $dato1['items'][$i]['id'];
+
+                $id = $dato1['items'][$i]['id'];
                 $user = $dato1['items'][$i]['nm'];
-                $km = $dato1['items'][$i]['cnm'];    
-             
+                $km = $dato1['items'][$i]['cnm'];
+                $unidad = array(
+                  'id' => $dato1['items'][$i]['id'],
+                  'user'=> $dato1['items'][$i]['nm'],
+                  'km'=> $dato1['items'][$i]['nm']
+                );
+
               $params = array(
               'unitId'=> $id,
               'sensores'=> 1,
@@ -178,29 +185,65 @@ class Prueba {
                
                 if( $ver && ['1'])
                  {
+                  $sensor =array(
+                    'com'=> $ver['1'],
+                    'kmh'=> $ver['2']
+                  );
                    $comb = $ver['1']; // Combustible 
                    $kmh =  $ver['2']; // kilometraje 
                  
-                
-                 $usuario = array(
+                  $datos = array(
+                    $unidad = array(
+                      'id' => $dato1['items'][$i]['id'],
+                      'user'=> $dato1['items'][$i]['nm'],
+                      'km'=> $dato1['items'][$i]['nm']
+                    ),
+                    $sensor =array(
+                      'com'=> $ver['1'],
+                      'kmh'=> $ver['2']
+                  )
+                  );
+                 $usuario  = array(
                   'id' => $id,
-                  'user'=> $user,
-                  'km' => $km,
+                  'usuario' =>$user,
+                  'km'=> $km,
                   'Combustible' => $comb,
                   'Km/h Tiempo' => $kmh
                   );
+
+                  $final1 = array_merge($unidad,$sensor);
+
+                  $final = array(
+                    'id' => $dato1['items'][$i]['id'],
+                    'user'=> $dato1['items'][$i]['nm'],
+                    'km'=> $dato1['items'][$i]['cnm'],
+                    'com'=> $ver['1'],
+                    'kmh'=> $ver['2']
+                  );
                  
-                  echo json_encode($usuario); 
-                }
+                    echo json_encode($final1);
+                  
+                    // echo json_encode($usuario);
+                    //vscodes
+                    $d = array();
+
+                    $name ='Ivan';
+                    $rating='223';
+                    $d []= array('item' => "$name",'rate' => "$rating");
+                    //$jsonCode = json_encode($d);
+                    ///echo $jsonCode;
               }
-           }      
+               
+            } 
              
           }
         }
        
       }
-
-     function Combustibleo($unidad)
+      
+     
+      /*   
+     function Combustibleoriginal ($unidad)
      {
 
         $wialon_api = new Wialon();
@@ -213,7 +256,7 @@ class Prueba {
             'spec' => array(
                 'itemsType' => 'avl_unit',
                 'propName'=> 'sys_name',
-                'propValueMask' => '*',
+                'propValueMask' => $unidad,
                 'sortType' => 'sys_name'
             ),
             'force' => 1,
@@ -221,18 +264,18 @@ class Prueba {
             'to'=>0,
             'flags' => 4611686018427387903
           );     
-          echo $wialon_api->core_search_items(json_encode($params));
           $dato=$wialon_api->core_search_items(json_encode($params));
           $dato1 =json_decode($dato, true);
           if(!isset($dato1['error'])){
             //echo  $dato1 ['searchSpec']['propValueMask'];
-            $var = $dato1['items'];
-           
             $id=$dato1['items']['0']['id'];
-            $user= $dato1['items']['0']['nm']; //Unidades
-            $Km=$dato1['items']['0']['cnm']; //Kilometraje 
+            echo 'Id: ', $id, "<br>",  // Id de la Unidad
+                 'Unidad: ', $dato1['items']['0']['nm'], "<br>", //Unidades
+                 'Kilometraje: ',$dato1['items']['0']['cnm'], "<br>"; //Kilometraje
+           
             
             
+          } 
             $params = array(
                 'unitId'=> $id,
                 'sensores'=> 1,
@@ -241,23 +284,18 @@ class Prueba {
              $dato = $wialon_api->unit_calc_last_message(json_encode($params));
              $ver = json_decode($dato, true);
              if(!isset($ver['error'])){
-            
-                $comb = $ver['1']; // Combustible 
-                $kmt=  $ver['2']; //kilometraje
+               
+              if( $ver && ['1'])
+              {
+                echo 'Combustible: ', $ver['1'], 'L', // Combustible 
+               '<br>', 'km en tiempo real: ', $ver['2'], ' Km/h'; //kilometraje
+              }else{
               
-             }   
-             
-             $dato = array(
-                'id'=> $id,
-                'Unidad' => $user,
-                'Kilometraje' =>$Km,
-                'Combustible' => $comb,
-                'Km Tiempo'=> $kmt
-             );
-             echo json_encode($dato);
-            }
-            
-        }
+               echo 'NO CONTIENE SENSOR DE COMBUSTIBLE';
+              }
+             }    
+        }*/
      }
+     
 }
 ?>
