@@ -192,17 +192,7 @@ class Prueba {
                    $comb = $ver['1']; // Combustible 
                    $kmh =  $ver['2']; // kilometraje 
                  
-                  $datos = array(
-                    $unidad = array(
-                      'id' => $dato1['items'][$i]['id'],
-                      'user'=> $dato1['items'][$i]['nm'],
-                      'km'=> $dato1['items'][$i]['nm']
-                    ),
-                    $sensor =array(
-                      'com'=> $ver['1'],
-                      'kmh'=> $ver['2']
-                  )
-                  );
+                  
                  $usuario  = array(
                   'id' => $id,
                   'usuario' =>$user,
@@ -220,18 +210,9 @@ class Prueba {
                     'com'=> $ver['1'],
                     'kmh'=> $ver['2']
                   );
-                 
-                    echo json_encode($final1);
+                   
+                    echo json_encode($final);
                   
-                    // echo json_encode($usuario);
-                    //vscodes
-                    $d = array();
-
-                    $name ='Ivan';
-                    $rating='223';
-                    $d []= array('item' => "$name",'rate' => "$rating");
-                    //$jsonCode = json_encode($d);
-                    ///echo $jsonCode;
               }
                
             } 

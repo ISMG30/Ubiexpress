@@ -419,19 +419,27 @@ $array0 =array(
    'id'=> 302,
    'user'=>'C. ROJA SN-75-866',
    'km'=>'29001',
-   'Combustible' => '56.5',
-   'Km/h'=>0
+   
  ),
  $array1 =array(
-  'id'=> 401,
-  'user'=>'C. ROJA SN-75-862',
-  'km'=>'27689',
+
   'Combustible' => '56',
   'Km/h'=>0
+ ),
+$array2 =array(
+  'id'=> 302,
+  'user'=>'C. ROJA SN-75-866',
+  'km'=>'29001',
+  
+),
+$array3 =array(
+
+ 'Combustible' => '56',
+ 'Km/h'=>0
 )
 );
  $final = array_merge($array, $array1);
- echo json_encode($array);
+ echo json_encode(array_merge($array, $array1));
 
 $wialon_api->logout();
 }else{
