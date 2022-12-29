@@ -1,8 +1,10 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-$token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+//$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
+$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
 $result = $wialon_api->login($token);
+//$result = $wialon_api->login('adminhidalgo','Hidalgo99');
 //$result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
@@ -87,16 +89,22 @@ if(!isset($json['error'])){
         'spec' => array(
             'itemsType' => 'avl_unit',
             'propName'=> 'sys_name',
-            'propValueMask' => '*',
+            'propValueMask' => 'C. ROJA SN-75-862',
             'sortType' => 'sys_name'
         ),
         'force' => 1,
         'from' => 0,
         'to'=>0,
-        'flags' => 4611686018427387903
+        'flags' => 0x00000400
       );
       
-     // echo $wialon_api->core_search_items(json_encode($params));
+      //echo $wialon_api->core_search_items(json_encode($params));
+
+      $params= array(
+        'itemId'=>302,
+
+      );
+      echo $wialon_api->unit_get_trip_detector(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -119,7 +127,7 @@ if(!isset($json['error'])){
         'flags' =>4097
       );
       
-      // echo $wialon_api->core_search_items(json_encode($params));
+       echo $wialon_api->core_search_items(json_encode($params));
       
       //$Unidad='C. ROJA SN-75-866';
       $params =array(
@@ -307,17 +315,30 @@ if(!isset($json['error'])){
         'timeTo' => 23, 
         'fullJson' =>0 
        );
-      // echo $wialon_api->router_get_all_rounds($params);
+      //echo $wialon_api->router_get_all_rounds($params);
       
        $params =array(
         'itemId' =>'302', 
-        'col' => 20
+        'col' => [20]
        );
-       for($x=0; $x>count($params);$x++)
-       {
-          echo $params[$x]."<br>";
-       }
-       //echo $wialon_api->route_get_round_data($params);
+     
+       echo $wialon_api->route_get_round_data($params);
+
+       $params = array(
+         'street'=>'skryganova',
+         'flags'=> 1796,
+         'count'=>3,
+         'indexFrom'=>0,
+         'uid'=>50935
+       );
+       echo $wialon_api->routes_git_search(json_encode($params));
+
+       $params=array(
+        'userId'=>440,
+        'type'=>1,
+        'destination'=>'m30g05@gmail.com'
+       );
+       echo $wialon_api->user_verify_auth(json_encode($params));
 
      $params = array(
         'reportResourceId' => 163266,
@@ -411,35 +432,52 @@ if(!isset($json['error'])){
 
  $params= array(
   'id'=>302,
-  'flags'=>	 0x00000100
+  'flags'=>	 1025
  );
- //echo $wialon_api->core_search_item(json_encode($params));
-$array0 =array(
+// echo $wialon_api->core_search_item(json_encode($params));
+
  $array =array(
    'id'=> 302,
    'user'=>'C. ROJA SN-75-866',
    'km'=>'29001',
    
- ),
+ );
  $array1 =array(
 
   'Combustible' => '56',
   'Km/h'=>0
- ),
+ );
 $array2 =array(
   'id'=> 302,
   'user'=>'C. ROJA SN-75-866',
   'km'=>'29001',
   
-),
+);
 $array3 =array(
 
  'Combustible' => '56',
  'Km/h'=>0
-)
 );
- $final = array_merge($array, $array1);
- echo json_encode(array_merge($array, $array1));
+ 
+$arfinal[] =array(
+  '1'=>$array,
+  '2'=>$array1,
+  '3'=>$array2,
+  '4'=>$array3,
+ 
+);
+$final1=array($array+$array1);
+ //$final = array_merge($array, $array1);
+//echo json_encode($final1);
+ $arr = array('Name' => 'Test', 
+            'Age' => 24, 
+            'Email' => 'test@gmail.com'); 
+$arr1 = array('Name' => 'Test', 
+            'Age' => 24, 
+            'Email' => 'test@gmail.com'); 
+$final=array($arr ,
+ $arr1);
+//echo json_encode($final)."\n";
 
 $wialon_api->logout();
 }else{

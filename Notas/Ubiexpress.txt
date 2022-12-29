@@ -1,0 +1,66 @@
+Token: 9184acef7671d237a45f10b8cf35cb44B003CD0D9E5E9E082307869551D96DB4D5E653C8
+
+http://local.ubiexpress.net/wialon/ajax.html?svc=token/login&
+	params={"token":"2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA"}
+
+2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA
+
+9184acef7671d237a45f10b8cf35cb4475CC364E21D7F83A845E5D5BDA58E2D6BC3224E5
+9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D
+usuario: PROGRAMACION   password: PRUEBAS12
+
+https://local.ubiexpress.net/wialon/ajax.html?svc=core/update_data_flags&
+https://local.ubiexpress.net/wialon/ajax.html?svc=core/logout&params={}&sid=b0432204b4d5ceb4f62119d1bbe0b22d
+
+2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA	
+
+762ade16bbb57a9cb76ee5daf1fa71ca" HIDALGUIN
+
+{"host":"189.190.227.92","eid":"2a0d0e1f634c3f11882104bc61729415","gis_sid":"ddccdc97","au":"PROGRAMACION","tm":1670440468,
+
+
+{"type":"avl_unit","version":"b4","mu":0,"general":{"n":"C. ROJA SN-75-866"},"counters":{"cfl":1808,"cnm":28224,"cneh":0,"cnkb":33610},"advProps":{"monitoring_sensor":"15 ff0000 3/4 TANQUE;30 ffff00 1/2 TANQUE;45 660099 3/4 TANQUE;55 009933 LLENO","use_sensor_color":"1","monitoring_sensor_id":"1","motion_state_sensor_id":"1","monitoring_battery_id":"","track_sensor":"","sensors_colors":"","sensors_colors_id":"","track_solid":"","solid_colors":"","track_speed":"","speed_colors":"","label_color":"16711680","trip_colors":"1","msgFilter":{"enabled":0,"skipInvalid":0,"lbsCorrection":0,"wifiCorrection":0,"minSats":0,"maxHdop":2,"maxSpeed":0,"minWifiPoints":0,"maxWifiPoints":0,"wifiAccuracy":0}},"fields":[],"sensors":[{"id":1,"n":"COMBUSTIBLE","t":"fuel level","d":"NIVEL COMBUSTIBLE|0:0:20:10:40:20:60:30:80:40:100:50:120:60:140:70:160:80:180:90:200:100","m":"l","p":"adc1","f":0,"c":"{\"act\":1,\"appear_in_popup\":true,\"calc_fuel\":2,\"ci\":{\"15\":{\"c\":16711680,\"t\":\"3\\/4 TANQUE\"},\"30\":{\"c\":16776960,\"t\":\"1\\/2 TANQUE\"},\"45\":{\"c\":6684825,\"t\":\"3\\/4 TANQUE\"},\"55\":{\"c\":39219,\"t\":\"LLENO\"}},\"cm\":1,\"fuel_params\":{\"extraFillingTimeout\":200,\"fillingsJoinInterval\":300,\"filterQuality\":5,\"flags\":7754,\"ignoreStayTimeout\":20,\"minFillingVolume\":20,\"minTheftTimeout\":0,\"minTheftVolume\":10,\"theftsJoinInterval\":300},\"mu\":\"0\",\"pos\":1,\"show_time\":false,\"uct\":0}","vt":0,"vs":0,"tbl":[{"x":0,"a":0.5,"b":0},{"x":20,"a":0.5,"b":0},{"x":40,"a":0.5,"b":0},{"x":60,"a":0.5,"b":0},{"x":80,"a":0.5,"b":0},{"x":100,"a":0.5,"b":0},{"x":120,"a":0.5,"b":0},{"x":140,"a":0.5,"b":0},{"x":160,"a":0.5,"b":0},{"x":180,"a":0.5,"b":0}]},{"id":2,"n":"VELOCIDAD","t":"mileage","d":"","m":"km","p":"speed","f":0,"c":"{\"act\":1,\"appear_in_popup\":true,\"ci\":{},\"cm\":0,\"mu\":\"0\",\"pos\":2,\"show_time\":false,\"timeout\":0,\"uct\":0,\"unbound_code\":\"\",\"validate_driver_unbound\":0}","vt":0,"vs":0,"tbl":[]},{"id":3,"n":"KILOMETRAJE PRUEBA","t":"mileage","d":"","m":"km","p":"odometer","f":0,"c":"{\"act\":1,\"appear_in_popup\":true,\"ci\":{},\"cm\":0,\"mu\":\"0\",\"pos\":3,\"show_time\":false,\"timeout\":0,\"uct\":0,\"unbound_code\":\"\",\"validate_driver_unbound\":0}","vt":0,"vs":0,"tbl":[]}],"reportProps":{"speedLimit":0,"maxMessagesInterval":0,"dailyEngineHoursRate":0,"urbanMaxSpeed":60,"mileageCoefficient":1,"fuelRateCoefficient":10,"speedingTolerance":10,"speedingMinDuration":1,"speedingMode":0,"driver_activity":{"type":0}},"driving":{"global":{"accel_mode":"0"}}}
+
+
+{"item":{"nm":"PROGRAMACION","cls":1,"id":440,"mu":0,"uacl":16899},"flags":9}
+{"item":{"nm":"PROGRAMACION","cls":1,"id":440,"crt":92,"bact":91,"mu":0,"uacl":16899},"flags":5}
+
+
+
+http://local.ubiexpress.net/wialon/ajax.html?svc=report/get_result_chart&
+	params={
+		"attachmentIndex":0,
+		"action":0,
+		"width":600,
+		"height":300,
+		"autoScaleY":0,
+		"pixelFrom":0,
+		"pixelTo":300,
+		"flags":513
+	}&sid=a585eb1f6d3417c214dfcd7028dcdbcc
+http://local.ubiexpress.net/wialon/ajax.html?svc=core/login&params={user:"PROGRMACION",password:"PRUEBAS12"}
+
+https://hst-api.wialon.com/wialon/ajax.html?svc=report/get_result_map&
+	parámetros={
+		"ancho": 600,
+		"altura": 600
+	}&sid=<tu_sid>
+
+
+https://ocal.ubiexpress.net/wialon/ajax.html?svc=token/login&
+	params{
+		"token":"2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA"}
+
+
+https://local.ubiexpress.net/wialon/ajax.html??svc=report/get_result_map&
+	params={
+		"width":600,
+		"height":600
+	}&sid=a43ae356fc797e2d5c55b41181b40aa0
+
+
+
+http://local.ubiexpress.net/wialon/ajax.html/avl_item_image/<302>/<32>/<any.png>
+
+
+https://local.ubiexpress.net/wialon/ajax.html?svc=report/exec_report&params={"id":302,"banderas":1025}&sid=f24421de051cc77d75b51b55fee3f943

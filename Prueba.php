@@ -193,7 +193,7 @@ class Prueba {
                    $kmh =  $ver['2']; // kilometraje 
                  
                   
-                 $usuario  = array(
+                 $usuario[] = array(
                   'id' => $id,
                   'usuario' =>$user,
                   'km'=> $km,
@@ -201,18 +201,21 @@ class Prueba {
                   'Km/h Tiempo' => $kmh
                   );
 
-                  $final1 = array_merge($unidad,$sensor);
+                  //$final1 = array_diff($unidad,$sensor);
 
-                  $final = array(
+                  /*echo json_encode( array(
                     'id' => $dato1['items'][$i]['id'],
                     'user'=> $dato1['items'][$i]['nm'],
                     'km'=> $dato1['items'][$i]['cnm'],
                     'com'=> $ver['1'],
                     'kmh'=> $ver['2']
-                  );
-                   
-                    echo json_encode($final);
+                  ));*/
+                  $final1=array($unidad+$sensor);
+                    
+                  echo json_encode($usuario, JSON_UNESCAPED_SLASHES);
+                   // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);
                   
+                 
               }
                
             } 
@@ -222,7 +225,7 @@ class Prueba {
        
       }
       
-     
+      
       /*   
      function Combustibleoriginal ($unidad)
      {
