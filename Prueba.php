@@ -167,17 +167,18 @@ class Prueba {
                 $id = $dato1['items'][$i]['id'];
                 $user = $dato1['items'][$i]['nm'];
                 $km = $dato1['items'][$i]['cnm'];
+
                 $unidad = array(
                   'id' => $dato1['items'][$i]['id'],
                   'user'=> $dato1['items'][$i]['nm'],
                   'km'=> $dato1['items'][$i]['nm']
-                );
+                 );
 
-              $params = array(
-              'unitId'=> $id,
-              'sensores'=> 1,
-              'flags' => 0x01
-               ); 
+               $params = array(
+                'unitId'=> $id,
+                'sensores'=> 1,
+                'flags' => 0x01
+                ); 
               $dato = $wialon_api->unit_calc_last_message(json_encode($params));
               $ver = json_decode($dato, true);
               if(!isset($ver['error']))
@@ -185,15 +186,17 @@ class Prueba {
                
                 if( $ver && ['1'])
                  {
+
                   $sensor =array(
                     'com'=> $ver['1'],
                     'kmh'=> $ver['2']
                   );
+
                    $comb = $ver['1']; // Combustible 
                    $kmh =  $ver['2']; // kilometraje 
                  
                   
-                 $usuario[] = array(
+                 $usuario= array(
                   'id' => $id,
                   'usuario' =>$user,
                   'km'=> $km,
@@ -212,7 +215,7 @@ class Prueba {
                   ));*/
                   $final1=array($unidad+$sensor);
                     
-                  echo json_encode($usuario, JSON_UNESCAPED_SLASHES);
+                  echo json_encode($usuario);
                    // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);
                   
                  
@@ -224,11 +227,11 @@ class Prueba {
         }
        
       }
+    }
       
-      
-      /*   
-     function Combustibleoriginal ($unidad)
+     function  Posicion()
      {
+
 
         $wialon_api = new Wialon();
         $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
@@ -236,49 +239,43 @@ class Prueba {
         $json =json_decode($result, true);
         if(!isset($json['error']))
         {
-          $params = array(
-            'spec' => array(
-                'itemsType' => 'avl_unit',
-                'propName'=> 'sys_name',
-                'propValueMask' => $unidad,
-                'sortType' => 'sys_name'
-            ),
-            'force' => 1,
-            'from' => 0,
-            'to'=>0,
-            'flags' => 4611686018427387903
-          );     
-          $dato=$wialon_api->core_search_items(json_encode($params));
-          $dato1 =json_decode($dato, true);
-          if(!isset($dato1['error'])){
-            //echo  $dato1 ['searchSpec']['propValueMask'];
-            $id=$dato1['items']['0']['id'];
-            echo 'Id: ', $id, "<br>",  // Id de la Unidad
-                 'Unidad: ', $dato1['items']['0']['nm'], "<br>", //Unidades
-                 'Kilometraje: ',$dato1['items']['0']['cnm'], "<br>"; //Kilometraje
-           
-            
-            
-          } 
-            $params = array(
-                'unitId'=> $id,
-                'sensores'=> 1,
-                'flags' => 0x01
-              );
-             $dato = $wialon_api->unit_calc_last_message(json_encode($params));
-             $ver = json_decode($dato, true);
-             if(!isset($ver['error'])){
-               
-              if( $ver && ['1'])
+         
+            $params=array(
+              'layerName'=>'Unidad',
+              'itemId'=>302,
+              'timeFrom'=>1672293600, //Fecha y hora de Inicio
+              'timeTo'=>1672376400,  //Fecha y hora final
+              'tripDetector'=>1,
+              'trackColor'=>'trip',
+              'trackWidth'=>2,
+              'arrows'=>0,
+              'points'=>1,
+              'pointColor'=>'red',
+              'annotations'=>0,
+              'flags'=>0x0001
+            );
+          
+            $dato = $wialon_api->render_create_messages_layer(json_encode($params));
+            $var = json_decode($dato, true);
+              if(!isset($var['error']))
               {
-                echo 'Combustible: ', $ver['1'], 'L', // Combustible 
-               '<br>', 'km en tiempo real: ', $ver['2'], ' Km/h'; //kilometraje
-              }else{
-              
-               echo 'NO CONTIENE SENSOR DE COMBUSTIBLE';
+                 $km = $var['units']['0']['mileage']; //kilometraje por intervalo (metros) 
+                  echo ($km/1000),'km','<br>'; 
+                 $fecha= $var['units']['0']['msgs']['last']['time'];
+                 //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
+               //  $fecha1 = new DateTime($fecha);
+                //$fecha1->format("Y-m-d H:m:s");
+               // echo $fecha1;
+
+                // echo strtotime("29-12-2022" ,"23-00-00");
+
+                 $array = strptime('23-04-2020','%d-%m-%Y');
+                  $timestamp = mktime(0, 0, 0, $array['tm_mon']+1, $array['tm_mday'], $array['tm_year']+1900);
+                  echo "The timestamp is $timestamp.";
               }
-             }    
-        }*/
+        }
+
+
      }
      
 }

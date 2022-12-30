@@ -31,6 +31,13 @@ if(!empty($_POST['opcion'])){
       
         $dato = $Ubi -> Combustible();
     }
+    ;
+    break;
+    case 5:{
+        $dato =$Ubi->Posicion();
+    }
+    ;
+    break;
    }
 }
 ?>

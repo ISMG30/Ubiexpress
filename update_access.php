@@ -104,7 +104,7 @@ if(!isset($json['error'])){
         'itemId'=>302,
 
       );
-      echo $wialon_api->unit_get_trip_detector(json_encode($params));
+      //echo $wialon_api->unit_get_trip_detector(json_encode($params));
       //echo $resu;
     //  $ejemplo='{"searchSpec":{"itemsType":"avl_unit","propName":"sys_name","propValueMask":"*","sortType":"sys_name","propType":"","or_logic":"0"},"dataFlags":1,"totalItemsCount":7,"indexFrom":0,"indexTo":0,"items":[{"nm":"ADAN_AS","cls":2,"id":425,"mu":0,"uacl":19327369763},{"nm":"C. ROJA SN-75-866","cls":2,"id":302,"mu":0,"uacl":16931},{"nm":"HIDALGUIN","cls":2,"id":145,"mu":0,"uacl":16931},{"nm":"ISUZU 5 TON. SN-75-852","cls":2,"id":141,"mu":0,"uacl":16931},{"nm":"MICA_SU","cls":2,"id":429,"mu":0,"uacl":16931},{"nm":"TORTON AZUL","cls":2,"id":123,"mu":0,"uacl":16931},{"nm":"TRAILER CASCADIA SN-88-974","cls":2,"id":103,"mu":0,"uacl":16931}]}';
        //var_dump(json_decode($ejemplo));
@@ -127,7 +127,7 @@ if(!isset($json['error'])){
         'flags' =>4097
       );
       
-       echo $wialon_api->core_search_items(json_encode($params));
+       //echo $wialon_api->core_search_items(json_encode($params));
       
       //$Unidad='C. ROJA SN-75-866';
       $params =array(
@@ -322,7 +322,7 @@ if(!isset($json['error'])){
         'col' => [20]
        );
      
-       echo $wialon_api->route_get_round_data($params);
+       //echo $wialon_api->route_get_round_data($params);
 
        $params = array(
          'street'=>'skryganova',
@@ -331,14 +331,14 @@ if(!isset($json['error'])){
          'indexFrom'=>0,
          'uid'=>50935
        );
-       echo $wialon_api->routes_git_search(json_encode($params));
+      // echo $wialon_api->routes_git_search(json_encode($params));
 
        $params=array(
         'userId'=>440,
         'type'=>1,
         'destination'=>'m30g05@gmail.com'
        );
-       echo $wialon_api->user_verify_auth(json_encode($params));
+       //echo $wialon_api->user_verify_auth(json_encode($params));
 
      $params = array(
         'reportResourceId' => 163266,
@@ -435,6 +435,59 @@ if(!isset($json['error'])){
   'flags'=>	 1025
  );
 // echo $wialon_api->core_search_item(json_encode($params));
+ $params=array(
+  'unitId'=>302,
+   'sensors'=>0,
+   'flags'=>1
+ );
+ //echo $wialon_api->unit_calc_last_message(json_encode($params));
+ 
+ $params=array(
+  'itemId'=>302,			   
+  'msgsSource'=>'data messages',
+  'timeFrom'=>1672293600,
+  'timeTo'=>1672380000
+);
+
+ echo $wialon_api->unit_get_trips(json_encode($params));
+  //Ruta de la Unidad por Cordenadas
+ $params=array(
+  'itemId'=>302,  //Id de la Unidad
+  'timeFrom'=>1672293600,  //Fecha y hora de Inicio
+  'timeTo'=>1672380000,  //Fecha y hora  final
+  'flags'=>0x0000,  // bandera
+  'flagsMask'=>0x0000,
+  'loadCount'=>0xffffffff 
+);
+  //echo $wialon_api->messages_load_interval(json_encode($params));
+
+ $params=array(
+    'layerName'=>'Unidad',
+    'format'=> 'txt',
+    'itemId'=>302,
+    'timeFrom'=>1672293600,
+    'timeTo'=>1672380000,
+    'compress'=>0
+  );
+    //echo $wialon_api->exchange_export_messages(json_encode($params));
+//Crear capa de pista km y latitud y longitud https://sdk.wialon.com/wiki/en/local/remoteapi2004/apiref/render/create_messages_layer
+    $params=array(
+      'layerName'=>'Unidad',
+      'itemId'=>302,
+      'timeFrom'=>1672293600, //Fecha y hora de Inicio
+      'timeTo'=>1672376400,  //Fecha y hora final
+      'tripDetector'=>1,
+      'trackColor'=>'trip',
+      'trackWidth'=>2,
+      'arrows'=>0,
+      'points'=>1,
+      'pointColor'=>'red',
+      'annotations'=>0,
+      'flags'=>0x0001
+    );
+      echo $wialon_api->render_create_messages_layer(json_encode($params));
+
+
 
  $array =array(
    'id'=> 302,
