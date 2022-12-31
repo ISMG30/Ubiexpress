@@ -34,7 +34,8 @@ if(!empty($_POST['opcion'])){
     ;
     break;
     case 5:{
-        $dato =$Ubi->Posicion();
+        $fechaI=$_POST['fecha'];
+        $dato =$Ubi->Posicion($fechaI);
     }
     ;
     break;

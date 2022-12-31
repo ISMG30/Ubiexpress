@@ -229,7 +229,7 @@ class Prueba {
       }
     }
       
-     function  Posicion()
+     function  Posicion($fechaI)
      {
 
 
@@ -239,10 +239,39 @@ class Prueba {
         $json =json_decode($result, true);
         if(!isset($json['error']))
         {
-         
+          $params = array(
+            'spec' => array(
+                'itemsType' => 'avl_unit',
+                'propName'=> 'sys_name',
+                'propValueMask' =>'*',
+                'sortType' => 'sys_name'
+            ),
+            'force' => 1,
+            'from' => 0,
+            'to'=>0,
+            'flags' => 4611686018427387903
+          );    
+          $dato=$wialon_api->core_search_items(json_encode($params));
+          $dato1 = json_decode($dato, true);
+          if(!isset($dato1['error'])){
+            $var = $dato1['items'];
+
+           for($i=0; $i<count($var); $i++)
+            {  $id = $dato1['items'][$i]['id'];
+
+                $id = $dato1['items'][$i]['id'];
+                $user = $dato1['items'][$i]['nm'];
+                $km = $dato1['items'][$i]['cnm'];
+
+                $unidad = array(
+                  'id' => $dato1['items'][$i]['id'],
+                  'user'=> $dato1['items'][$i]['nm'],
+                  'km'=> $dato1['items'][$i]['nm']
+                 );
+                
             $params=array(
               'layerName'=>'Unidad',
-              'itemId'=>302,
+              'itemId'=>$id,
               'timeFrom'=>1672293600, //Fecha y hora de Inicio
               'timeTo'=>1672376400,  //Fecha y hora final
               'tripDetector'=>1,
@@ -254,24 +283,46 @@ class Prueba {
               'annotations'=>0,
               'flags'=>0x0001
             );
-          
+         // echo $wialon_api->render_create_messages_layer(json_encode($params));
             $dato = $wialon_api->render_create_messages_layer(json_encode($params));
             $var = json_decode($dato, true);
               if(!isset($var['error']))
-              {
+              {  
+                 $id = $var['units'][0]['id'];
                  $km = $var['units']['0']['mileage']; //kilometraje por intervalo (metros) 
-                  echo ($km/1000),'km','<br>'; 
+                  //echo ($km/1000),'km','<br>'; 
+                  //echo $id;
                  $fecha= $var['units']['0']['msgs']['last']['time'];
+                 for($i=0, $i<count($id);; $i++){
+                 $array = array(
+                    'id'=>$i,
+                    'km'=>$km
+                 );
+                }
+                $josn= json_encode($array);
+                 echo $josn;
+                }
+              }  
+                 
                  //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
-               //  $fecha1 = new DateTime($fecha);
+                // $fecha1 = new DateTime($fecha);
                 //$fecha1->format("Y-m-d H:m:s");
                // echo $fecha1;
 
                 // echo strtotime("29-12-2022" ,"23-00-00");
+               
+                //$timestamp = $date->getTimestamp();
+                //$timestamp=strtotime($fechaI);
+              //  $timestamp=mktime('12:13:00');
+                 //echo $timestamp,'<br>';
+              // echo strtotime($fechaI); 
+            
+              
+              
+              
+          
+        
 
-                 $array = strptime('23-04-2020','%d-%m-%Y');
-                  $timestamp = mktime(0, 0, 0, $array['tm_mon']+1, $array['tm_mday'], $array['tm_year']+1900);
-                  echo "The timestamp is $timestamp.";
               }
         }
 
