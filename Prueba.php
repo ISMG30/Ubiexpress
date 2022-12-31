@@ -300,8 +300,7 @@ class Prueba {
                  );
                 }
                 $josn= json_encode($array);
-                 echo $josn;
-                }
+                 echo $josn;                }
               }  
                  
                  //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
