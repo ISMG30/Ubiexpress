@@ -3,13 +3,11 @@
 include_once 'wialon.php';
 
 class Prueba {
-   
-   
-
 
    function __construct()
     {
        $this -> wialon_api = new Wialon();
+      
     }
 
     function login()
@@ -28,9 +26,7 @@ class Prueba {
                 echo json_encode($user);
             }else{
                 echo "error";
-            }
-              
-          
+            }  
         }
     }
 
@@ -87,7 +83,6 @@ class Prueba {
         $json = json_decode($result, true);
         if(!isset($json['error']))
         { 
-           
              $params = array(
                 'spec' => array(
                     'itemsType' => 'avl_unit',
@@ -162,17 +157,17 @@ class Prueba {
             $var = $dato1['items'];
 
            for($i=0; $i<count($var); $i++)
-            {  $id = $dato1['items'][$i]['id'];
-
+             {  
                 $id = $dato1['items'][$i]['id'];
+                //$id = $dato1['items'][$i]['id'];
                 $user = $dato1['items'][$i]['nm'];
                 $km = $dato1['items'][$i]['cnm'];
 
-                $unidad = array(
+                /*$unidad = array(
                   'id' => $dato1['items'][$i]['id'],
                   'user'=> $dato1['items'][$i]['nm'],
                   'km'=> $dato1['items'][$i]['nm']
-                 );
+                 );*/
 
                $params = array(
                 'unitId'=> $id,
@@ -187,15 +182,14 @@ class Prueba {
                 if( $ver && ['1'])
                  {
 
-                  $sensor =array(
+                  /*$sensor =array(
                     'com'=> $ver['1'],
                     'kmh'=> $ver['2']
-                  );
+                  );*/
 
                    $comb = $ver['1']; // Combustible 
                    $kmh =  $ver['2']; // kilometraje 
-                 
-                  
+
                  $usuario= array(
                   'id' => $id,
                   'usuario' =>$user,
@@ -203,7 +197,7 @@ class Prueba {
                   'Combustible' => $comb,
                   'Km/h Tiempo' => $kmh
                   );
-
+                 
                   //$final1 = array_diff($unidad,$sensor);
 
                   /*echo json_encode( array(
@@ -213,26 +207,19 @@ class Prueba {
                     'com'=> $ver['1'],
                     'kmh'=> $ver['2']
                   ));*/
-                  $final1=array($unidad+$sensor);
-                    
-                  echo json_encode($usuario);
-                   // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);
+                  //$final1=array($unidad+$sensor);
                   
-                 
+                  echo json_encode($usuario );
+                   // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);  
               }
-               
-            } 
-             
+            }  
           }
         }
-       
       }
     }
       
-     function  Posicion($fechaI)
+     function  Posicion()
      {
-
-
         $wialon_api = new Wialon();
         $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
         $result = $wialon_api -> login($token);
@@ -257,18 +244,17 @@ class Prueba {
             $var = $dato1['items'];
 
            for($i=0; $i<count($var); $i++)
-            {  $id = $dato1['items'][$i]['id'];
-
+            {  
                 $id = $dato1['items'][$i]['id'];
                 $user = $dato1['items'][$i]['nm'];
                 $km = $dato1['items'][$i]['cnm'];
 
-                $unidad = array(
+               /* $unidad = array(
                   'id' => $dato1['items'][$i]['id'],
                   'user'=> $dato1['items'][$i]['nm'],
                   'km'=> $dato1['items'][$i]['nm']
-                 );
-                
+                 );*/
+
             $params=array(
               'layerName'=>'Unidad',
               'itemId'=>$id,
@@ -283,50 +269,226 @@ class Prueba {
               'annotations'=>0,
               'flags'=>0x0001
             );
-         // echo $wialon_api->render_create_messages_layer(json_encode($params));
+            //echo $wialon_api->render_create_messages_layer(json_encode($params));
             $dato = $wialon_api->render_create_messages_layer(json_encode($params));
             $var = json_decode($dato, true);
               if(!isset($var['error']))
               {  
                  $id = $var['units'][0]['id'];
                  $km = $var['units']['0']['mileage']; //kilometraje por intervalo (metros) 
-                  //echo ($km/1000),'km','<br>'; 
+                 $kmf = ($km/1000); 
                   //echo $id;
                  $fecha= $var['units']['0']['msgs']['last']['time'];
-                 for($i=0, $i<count($id);; $i++){
+                 /*for($i=0, $i<count($id);; $i++){**/
                  $array = array(
                     'id'=>$i,
-                    'km'=>$km
+                    'unidad'=> $user,
+                    'km'=>$kmf
                  );
-                }
-                $josn= json_encode($array);
-                 echo $josn;                }
-              }  
                  
-                 //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
+                //}
+                $josn= json_encode($array);
+                 echo $josn; 
+              }
+            }  
+                //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
                 // $fecha1 = new DateTime($fecha);
                 //$fecha1->format("Y-m-d H:m:s");
-               // echo $fecha1;
-
-                // echo strtotime("29-12-2022" ,"23-00-00");
-               
+                // echo $fecha1;
+                // echo strtotime("29-12-2022" ,"23-00-00"); 
                 //$timestamp = $date->getTimestamp();
                 //$timestamp=strtotime($fechaI);
-              //  $timestamp=mktime('12:13:00');
-                 //echo $timestamp,'<br>';
-              // echo strtotime($fechaI); 
+                //  $timestamp=mktime('12:13:00');
+                //echo $timestamp,'<br>';
+                // echo strtotime($fechaI); 
             
-              
-              
-              
-          
-        
-
-              }
+          }
         }
-
-
      }
+
+     function  Posicion1()
+     {
+        $wialon_api = new Wialon();
+        $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+        $result = $wialon_api -> login($token);
+        $json =json_decode($result, true);
+        if(!isset($json['error']))
+        {
+          $params = array(
+            'spec' => array(
+                'itemsType' => 'avl_unit',
+                'propName'=> 'sys_name',
+                'propValueMask' =>'*',
+                'sortType' => 'sys_name'
+            ),
+            'force' => 1,
+            'from' => 0,
+            'to'=>0,
+            'flags' => 4611686018427387903
+          );    
+          $dato=$wialon_api->core_search_items(json_encode($params));
+          $dato1 = json_decode($dato, true);
+          if(!isset($dato1['error'])){
+            $var = $dato1['items'];
+
+           for($i=0; $i<count($var); $i++)
+            {  
+                $id = $dato1['items'][$i]['id'];
+                $user = $dato1['items'][$i]['nm'];
+                $km = $dato1['items'][$i]['cnm'];
+
+               /* $unidad = array(
+                  'id' => $dato1['items'][$i]['id'],
+                  'user'=> $dato1['items'][$i]['nm'],
+                  'km'=> $dato1['items'][$i]['nm']
+                 );*/
+                }
+                 $params=array(
+                  'itemId'=>302,  //Id de la Unidad
+                  'timeFrom'=>1672293600,  //Fecha y hora de Inicio
+                  'timeTo'=>1672380000,  //Fecha y hora  final
+                  'flags'=>0x0000,  // bandera
+                  'flagsMask'=>0x0000,
+                  'loadCount'=>0xffffffff 
+                );
+                //echo $wialon_api->messages_load_interval(json_encode($params));
+            $dato = $wialon_api->messages_load_interval(json_encode($params));
+            $var = json_decode($dato, true);
+              if(!isset($var['error']))
+              {  
+                $posiciony = $var['messages']['50']['pos'];
+                $posicionx = $var['messages']['0']['pos']['x'];
+                $posiciony1 = $var['messages']['1']['pos']['y'];
+                $posicionx1 = $var['messages']['1']['pos']['x'];
+                $posiciony2 = $var['messages']['2']['pos']['y'];
+                $posicionx2 = $var['messages']['2']['pos']['x'];
+                $posiciony3 = $var['messages']['3']['pos']['y'];
+                $posicionx3 = $var['messages']['3']['pos']['x'];
+
+                 
+                 for($i=0; $i<count($posiciony);$i++)
+                 {
+                   $y = $var['messages'][$i]['pos']['y'];
+                   $x = $var['messages'][$i]['pos']['x'];
+                   echo 'y ', $y,', x ', $x, '<br>';
+                 }
+                  /*echo $posiciony,   $posicionx, '<br>';
+                  echo $posiciony1,   $posicionx1, '<br>';
+
+                  echo $posiciony2,   $posicionx2, '<br>';
+
+                  echo $posiciony3,   $posicionx3, '<br>';*/
+
+
+                
+                 
+              } 
+            }  
+                //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
+                // $fecha1 = new DateTime($fecha);
+                //$fecha1->format("Y-m-d H:m:s");
+                // echo $fecha1;
+                // echo strtotime("29-12-2022" ,"23-00-00"); 
+                //$timestamp = $date->getTimestamp();
+                //$timestamp=strtotime($fechaI);
+                //  $timestamp=mktime('12:13:00');
+                //echo $timestamp,'<br>';
+                // echo strtotime($fechaI); 
+            
+          }
+        }
+     //}
+
+     
+     function Combustibleo()
+     {
+        $wialon_api = new Wialon();
+        $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+        $result = $wialon_api -> login($token);
+        $json =json_decode($result, true);
+        if(!isset($json['error']))
+        {
+          $params = array(
+            'spec' => array(
+                'itemsType' => 'avl_unit',
+                'propName'=> 'sys_name',
+                'propValueMask' =>'*',
+                'sortType' => 'sys_name'
+            ),
+            'force' => 1,
+            'from' => 0,
+            'to'=>0,
+            'flags' => 4611686018427387903
+          );    
+          $dato=$wialon_api->core_search_items(json_encode($params));
+          $dato1 = json_decode($dato, true);
+          if(!isset($dato1['error'])){
+            $var = $dato1['items'];
+
+           for($i=0; $i<count($var); $i++)
+             {  
+                $id = $dato1['items'][$i]['id'];
+                //$id = $dato1['items'][$i]['id'];
+                $user = $dato1['items'][$i]['nm'];
+                $km = $dato1['items'][$i]['cnm'];
+                
+                $unidad = array(
+                  'id' => $dato1['items'][$i]['id'],
+                  'user'=> $dato1['items'][$i]['nm'],
+                  'km'=> $dato1['items'][$i]['nm']
+                 );
+                 //echo json_encode($unidad);
+             
+               $params = array(
+                'unitId'=> $id,
+                'sensores'=> 1,
+                'flags' => 0x01
+                ); 
+              $dato = $wialon_api->unit_calc_last_message(json_encode($params));
+              $ver = json_decode($dato, true);
+              if(!isset($ver['error']))
+              { 
+               
+                if( $ver && ['1'])
+                 {
+
+                  $sensor =array(
+                    'com'=> $ver['1'],
+                    'kmh'=> $ver['2']
+                  );
+
+                   $comb = $ver['1']; // Combustible 
+                   $kmh =  $ver['2']; // kilometraje 
+
+                 $usuario= array(
+                  'id' => $id,
+                  'usuario' =>$user,
+                  'km'=> $km,
+                  'Combustible' => $comb,
+                  'Km/h Tiempo' => $kmh
+                  );
+                 
+                  //$final1 = array_diff($unidad,$sensor);
+
+                  /*echo json_encode( array(
+                    'id' => $dato1['items'][$i]['id'],
+                    'user'=> $dato1['items'][$i]['nm'],
+                    'km'=> $dato1['items'][$i]['cnm'],
+                    'com'=> $ver['1'],
+                    'kmh'=> $ver['2']
+                  ));*/
+                  $final1=[];
+                  $final1 =array($usuario+$sensor);
+                  
+                  echo json_encode($final1 );
+                  
+                   // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);  
+              }
+            }  
+          }
+        }
+      }
+    }
      
 }
 ?>

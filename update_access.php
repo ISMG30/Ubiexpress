@@ -449,7 +449,7 @@ if(!isset($json['error'])){
   'timeTo'=>1672380000
 );
 
- echo $wialon_api->unit_get_trips(json_encode($params));
+ //echo $wialon_api->unit_get_trips(json_encode($params));
   //Ruta de la Unidad por Cordenadas
  $params=array(
   'itemId'=>302,  //Id de la Unidad
@@ -459,7 +459,7 @@ if(!isset($json['error'])){
   'flagsMask'=>0x0000,
   'loadCount'=>0xffffffff 
 );
-  //echo $wialon_api->messages_load_interval(json_encode($params));
+  echo $wialon_api->messages_load_interval(json_encode($params));
 
  $params=array(
     'layerName'=>'Unidad',
@@ -513,8 +513,8 @@ $array3 =array(
 );
  
 $arfinal[] =array(
-  '1'=>$array,
-  '2'=>$array1,
+  $array,
+  $array1,
   '3'=>$array2,
   '4'=>$array3,
  
@@ -530,7 +530,7 @@ $arr1 = array('Name' => 'Test',
             'Email' => 'test@gmail.com'); 
 $final=array($arr ,
  $arr1);
-//echo json_encode($final)."\n";
+echo json_encode($arfinal)."\n";
 
 $wialon_api->logout();
 }else{

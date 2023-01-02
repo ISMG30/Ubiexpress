@@ -29,16 +29,22 @@ if(!empty($_POST['opcion'])){
     break;
     case 4: {
       
-        $dato = $Ubi -> Combustible();
+        $dato = $Ubi -> Combustibleo();
     }
     ;
     break;
     case 5:{
-        $fechaI=$_POST['fecha'];
-        $dato =$Ubi->Posicion($fechaI);
+       // $fechaI=$_POST['fecha'];
+        $dato =$Ubi->Posicion();
     }
     ;
     break;
+    case 6:{
+        // $fechaI=$_POST['fecha'];
+         $dato =$Ubi->Posicion1();
+     }
+     ;
+     break;
    }
 }
 ?>
