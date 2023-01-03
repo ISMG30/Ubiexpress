@@ -288,6 +288,7 @@ class Prueba {
                     'km' => $kmf
                    );
                    echo json_encode($array1);
+                   //https://appdividend.com/2022/01/26/php-json_encode/
                    
                   
               }
