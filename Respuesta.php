@@ -34,8 +34,9 @@ if(!empty($_POST['opcion'])){
     ;
     break;
     case 5:{
-       // $fechaI=$_POST['fecha'];
-        $dato =$Ubi->Posicion();
+        $fechaI=$_POST['fechai'];
+        $fechaF=$_POST['fechaf'];
+        $dato =$Ubi-> KmRecorido($fechaI, $fechaF);
     }
     ;
     break;

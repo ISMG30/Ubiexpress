@@ -469,13 +469,13 @@ if(!isset($json['error'])){
     'timeTo'=>1672380000,
     'compress'=>0
   );
-    //echo $wialon_api->exchange_export_messages(json_encode($params));
+   // echo $wialon_api->exchange_export_messages(json_encode($params));
 //Crear capa de pista km y latitud y longitud https://sdk.wialon.com/wiki/en/local/remoteapi2004/apiref/render/create_messages_layer
     $params=array(
       'layerName'=>'Unidad',
-      'itemId'=>302,
-      'timeFrom'=>1672293600, //Fecha y hora de Inicio
-      'timeTo'=>1672376400,  //Fecha y hora final
+      'itemId'=>123,
+      'timeFrom'=>1672380000, //Fecha y hora de Inicio
+      'timeTo'=>1672462800,  //Fecha y hora final
       'tripDetector'=>1,
       'trackColor'=>'trip',
       'trackWidth'=>2,
@@ -485,7 +485,7 @@ if(!isset($json['error'])){
       'annotations'=>0,
       'flags'=>0x0001
     );
-      echo $wialon_api->render_create_messages_layer(json_encode($params));
+      //echo $wialon_api->render_create_messages_layer(json_encode($params));
 
 
 
@@ -530,7 +530,19 @@ $arr1 = array('Name' => 'Test',
             'Email' => 'test@gmail.com'); 
 $final=array($arr ,
  $arr1);
-echo json_encode($arfinal)."\n";
+//echo json_encode($arfinal)."\n";
+
+                //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
+                 //$fecha1 = new DateTime($fecha);
+               // $fecha1->format("Y-m-d H:m:s");
+                 //echo $fecha1;
+                 
+       
+                //$timestamp = $date->getTimestamp();
+                //$timestamp=strtotime($fechaI);
+                //  $timestamp=mktime('12:13:00');
+                //echo $timestamp,'<br>';
+                // echo strtotime($fechaI); 
 
 $wialon_api->logout();
 }else{

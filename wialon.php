@@ -5,7 +5,7 @@
 	* The MIT License (MIT)
 	*
 	* Copyright:
-	* 2002-2015 Gurtam, http://gurtam.com
+	* 2002-2015 Gurtam, http://gurtam.com 
 	*/
 	
 	/** Wialon RemoteApi wrapper Class
