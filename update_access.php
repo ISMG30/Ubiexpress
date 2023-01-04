@@ -90,7 +90,7 @@ if(!isset($json['error'])){
         'spec' => array(
             'itemsType' => 'avl_unit',
             'propName'=> 'sys_name',
-            'propValueMask' => 'C. ROJA SN-75-862',
+            'propValueMask' => '*',
             'sortType' => 'sys_name'
         ),
         'force' => 1,
@@ -99,7 +99,23 @@ if(!isset($json['error'])){
         'flags' => 0x00000400
       );
       
-      //echo $wialon_api->core_search_items(json_encode($params));
+      echo $wialon_api->core_search_items(json_encode($params));
+      $dato= json_decode($var, true);
+       if(!isset($dato['error'])){
+        $arr =[];
+         foreach($dato['items'] as $row){
+          $arr [] = array(
+        'id' => $row['id'],
+        'user' => $row['nm'],
+        'km' => $row['cnm']
+
+      );
+
+       //echo json_encode($posicion);
+     }
+     echo json_encode($arr);
+
+  }
 
       $params= array(
         'itemId'=>302,
@@ -473,7 +489,7 @@ if(!isset($json['error'])){
     
        //echo json_encode($posicion);
      }
-     echo json_encode($arr);
+    // echo json_encode($arr);
 
   }
 

@@ -8,7 +8,7 @@ class Prueba {
      private $app;
    function __construct()
     {
-       //$this -> wialon_api = new Wialon();
+        //$this -> wialon_api = new Wialon();
        // $this ->app =new Prueba();
       
     }
@@ -59,10 +59,10 @@ class Prueba {
               if(!isset($dato1['error'])){
               //echo  $dato1 ['searchSpec']['propValueMask'];
               //  echo $dato1['items']['0']['nm'];
-                $param =array (
+                /*$param =array (
                   $dato1['items']
-                );
-
+                );*/
+                 $array=[];
                 foreach($dato1['items'] as $user){
                           //$user1 = $user['items'];
                           $user1 = $user['nm'];
@@ -71,8 +71,9 @@ class Prueba {
                              'user'=>$user1
                           );
                           
-                          echo json_encode($array);
+                          
                 }
+                echo json_encode($array);
                 /*$logitud=count($param);
                 for($i=0; $i<$logitud['0']; $i++){
                   echo $param[$i]; 
