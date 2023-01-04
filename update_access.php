@@ -1,10 +1,10 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-//$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
+//$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
 $result = $wialon_api->login($token);
-//$result = $wialon_api->login('adminhidalgo','Hidalgo99');
+//$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
 //$result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
@@ -12,7 +12,8 @@ if(!isset($json['error'])){
    //echo $userId = $json['user']['id'];
     //echo "<br>$userId<br>"; 
    //echo $result;
-
+ $params= array();
+ //echo $wialon_api->core_logout(json_encode($params));
   // echo $wialon_api->core_get_account_data('{"type":1}');
    //echo $wialon_api->core_search_item('{"id":440,"flags": 0x1}');
     
@@ -449,17 +450,32 @@ if(!isset($json['error'])){
   'timeTo'=>1672380000
 );
 
- //echo $wialon_api->unit_get_trips(json_encode($params));
+  //echo $wialon_api->unit_get_trips(json_encode($params));
   //Ruta de la Unidad por Cordenadas
- $params=array(
+  $params=array(
   'itemId'=>302,  //Id de la Unidad
   'timeFrom'=>1672293600,  //Fecha y hora de Inicio
   'timeTo'=>1672380000,  //Fecha y hora  final
   'flags'=>0x0000,  // bandera
   'flagsMask'=>0x0000,
   'loadCount'=>0xffffffff 
-);
-  echo $wialon_api->messages_load_interval(json_encode($params));
+  );
+  $var = $wialon_api->messages_load_interval(json_encode($params));
+  $dato= json_decode($var, true);
+  if(!isset($dato['error'])){
+    $arr =[];
+     foreach($dato['messages'] as $row){
+      $arr [] = array(
+        'y' =>$row['pos']['y'],
+        'x' => $row['pos']['x']
+
+      );
+    
+       //echo json_encode($posicion);
+     }
+     echo json_encode($arr);
+
+  }
 
  $params=array(
     'layerName'=>'Unidad',

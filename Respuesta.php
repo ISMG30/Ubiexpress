@@ -8,7 +8,7 @@ if(!empty($_POST['opcion'])){
    switch($opcion){
     case 1: {
           $dato = $Ubi->login();
-          return $dato;
+          
          
     }
     ;

@@ -3,10 +3,13 @@
 include_once 'wialon.php';
 
 class Prueba {
-
+   
+   //private $token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+     private $app;
    function __construct()
     {
        //$this -> wialon_api = new Wialon();
+       // $this ->app =new Prueba();
       
     }
 
@@ -33,12 +36,11 @@ class Prueba {
     function Usuarios($unidad)
     {
         $wialon_api = new Wialon();
-        $token = '2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+        $token = '9184acef7671d237a45f10b8cf35cb44B003CD0D9E5E9E082307869551D96DB4D5E653C8';
         $result = $wialon_api->login($token);
         $json = json_decode($result, true);
         if(!isset($json['error']))
-        {
-            
+        {    
             $params = array(
                 'spec' => array(
                     'itemsType' => 'avl_unit',
@@ -50,30 +52,39 @@ class Prueba {
                 'from' => 0,
                 'to'=>0,
                 'flags' => 0x1
-              );
-              
+              );  
               //echo $wialon_api->core_search_items(json_encode($params));
               $dato = $wialon_api->core_search_items(json_encode($params));
               $dato1 =json_decode($dato, true);
               if(!isset($dato1['error'])){
-                //echo  $dato1 ['searchSpec']['propValueMask'];
+              //echo  $dato1 ['searchSpec']['propValueMask'];
+              //  echo $dato1['items']['0']['nm'];
                 $param =array (
                   $dato1['items']
                 );
-                
-                $logitud=count($param);
+
+                foreach($dato1['items'] as $user){
+                          //$user1 = $user['items'];
+                          $user1 = $user['nm'];
+                         
+                          $array = array(
+                             'user'=>$user1
+                          );
+                          
+                          echo json_encode($array);
+                }
+                /*$logitud=count($param);
                 for($i=0; $i<$logitud['0']; $i++){
                   echo $param[$i]; 
                   echo '<br>';
-                }
-                
-               // echo $dato1['items']['0']['id'];
-              
+                }*/
+               //echo json_encode($dato1['items']['0']['nm']);
+               
+
+            
               } 
-              
-              
         }
-     }
+    }
      
      function NUnidad($unidad)
      {
@@ -115,6 +126,7 @@ class Prueba {
 
            $com = array($dato1['item']['sens']['1']['c']);
            $var =  $dato1['item']['nm'];
+           
             if( $var && $com)
            {
            //echo  $dato1['item']['sens']['1']['c'];
@@ -155,7 +167,7 @@ class Prueba {
           $dato1 = json_decode($dato, true);
           if(!isset($dato1['error'])){
             $var = $dato1['items'];
-
+             
            for($i=0; $i<count($var); $i++)
              {  
                 $id = $dato1['items'][$i]['id'];
@@ -209,7 +221,7 @@ class Prueba {
                   ));*/
                   //$final1=array($unidad+$sensor);
                   
-                  echo json_encode($usuario );
+                 // echo json_encode($usuario );
                    // echo json_encode($usuario,JSON_UNESCAPED_SLASHES);  
               }
             }  
@@ -287,7 +299,10 @@ class Prueba {
                     'unidad' => $user,
                     'km' => $kmf
                    );
-                   echo json_encode($array1);
+                   
+                   
+
+                   echo json_encode($array);
                    //https://appdividend.com/2022/01/26/php-json_encode/
                    
                   
@@ -296,6 +311,7 @@ class Prueba {
           }
         }
      }
+     
    /*  function  KmRecorido($fechaI, $fechaF)
      {
         $fecha = date_create($fechaI);    
