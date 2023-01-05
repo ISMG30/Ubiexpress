@@ -1,8 +1,8 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-//$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+//$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
+$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
 $result = $wialon_api->login($token);
 //$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
 //$result = $wialon_api->login($result);

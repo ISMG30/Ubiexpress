@@ -29,7 +29,7 @@ if(!empty($_POST['opcion'])){
     break;
     case 4: {
       
-        $dato = $Ubi -> Combustibleo();
+        $dato = $Ubi -> Combustible();
     }
     ;
     break;
