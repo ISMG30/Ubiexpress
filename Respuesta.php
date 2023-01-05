@@ -41,8 +41,10 @@ if(!empty($_POST['opcion'])){
     ;
     break;
     case 6:{
-        // $fechaI=$_POST['fecha'];
-         $dato =$Ubi->Posicion1();
+         $user = $_POST['unidad'];
+         $fechaI = $_POST['fechai'];
+         $fechaF = $_POST['fechaf'];
+         $dato =$Ubi->Posicion1($user, $fechaI, $fechaF);
      }
      ;
      break;

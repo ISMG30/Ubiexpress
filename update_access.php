@@ -1,8 +1,8 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-//$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
+//$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
 $result = $wialon_api->login($token);
 //$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
 //$result = $wialon_api->login($result);
@@ -20,6 +20,12 @@ if(!isset($json['error'])){
    //echo $json['eid'];
     //print_r($json['user']);
     //echo $wialon_api->core_get_hw_types();
+    $params = array(
+      'unitId'=> 341,                 //Identificación  de la unidad
+      'sensores'=> 1,                 //Matriz de ID de sensores
+      'flags' => 0x01                 //Bandera
+      ); 
+   echo $wialon_api->unit_calc_last_message(json_encode($params));
      $params = array(
         'itemId' => '', 
         'id' => '', 
@@ -99,7 +105,7 @@ if(!isset($json['error'])){
         'flags' => 0x00000400
       );
       
-      echo $wialon_api->core_search_items(json_encode($params));
+     // echo $wialon_api->core_search_items(json_encode($params));
       $dato= json_decode($var, true);
        if(!isset($dato['error'])){
         $arr =[];
@@ -113,7 +119,7 @@ if(!isset($json['error'])){
 
        //echo json_encode($posicion);
      }
-     echo json_encode($arr);
+     //echo json_encode($arr);
 
   }
 
@@ -481,7 +487,7 @@ if(!isset($json['error'])){
   if(!isset($dato['error'])){
     $arr =[];
      foreach($dato['messages'] as $row){
-      $arr [] = array(
+      $arr []  = array(
         'y' =>$row['pos']['y'],
         'x' => $row['pos']['x']
 
