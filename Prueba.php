@@ -7,15 +7,16 @@ include_once 'wialon.php';
 class Prueba {
    
    
-     var $token ='9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-     //var $token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+     
+   //var $token ='9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
+   //var $token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
     
    function __construct()
     {
         //$this -> wialon_api = new Wialon();     
     }
 
-    function login()
+    function login($fechai, $fechaf)
     {
         $wialon_api = new Wialon();
         $result = $wialon_api->login($this->token);
@@ -32,6 +33,43 @@ class Prueba {
                 echo "error";
             }  
         }
+        /*$fecha = date_create('06-01-2023 23:00:00');
+        date_timestamp_set($fecha, 1672648740);
+        //echo date_format($fecha, 'U') . "\n";
+        $unix = 1673019659;
+        $ts = 1673067600;
+        $fecha = new DateTime("@$ts");
+        //echo $fecha->format('U = Y-m-d H:i:s') . "\n"  ; 
+        $mktime =mktime("09","50","02","02","19","2023");
+       // echo $mktime;
+       $unixTimestamp = $mktime;
+        $dt = DateTime::createFromFormat("U.u", $unixTimestamp / 1000);
+        //var_dump($dt);
+        $datetime = '06-01-2023 11:38:00';
+
+        $unix_time = date('Y-m-d h:i:s', strtotime($datetime ));
+        //$f=new DateTime('06-01-2023 12:20:2023');
+        $fecha =($f/86400)+25569+ (-5/24);
+        $fechaunix =($fecha/86400);
+        //echo $fecha;*/
+      
+       $fe= strtotime($fechai);
+       $fechaIn = $fe+25200;
+       $fef=strtotime($fechaf);
+       $fechafi = $fef+25200;
+       echo $fechaIn, '<br>', $fechafi, '<br>';
+
+
+       
+       $unixi = date('d-m-y H:i:s', $fe);
+       $unixf = date('d-m-y H:i:s', 1672841173-25200);
+       echo  $unixf, '<br>';
+       $ts = 1672841173;
+       $fecha2 = new DateTime();
+        $timestamp2 = 1672841173-25200; // Cambiar este valor según corresponda.
+        $fecha2->setTimestamp($timestamp2);
+
+        echo $fecha2->format('Y-m-d H:i:s') . "\n";
     }
 
     function Usuarios($unidad)
@@ -186,13 +224,14 @@ class Prueba {
                 if($ver && ['1'])
                 {
                    $com = $ver['1'];
-                   $kmh = $ver['2'];
+                   //$kmh = $ver['2'];
                                   
                    $array []= array(
                     'id' => $row['id'],
                     'user' => $row['nm'],
                     'com' =>$com,
-                    'kmh' => $kmh
+                    'km'=>$row['cnm']
+                    //'kmh' => $kmh
                    );             
                 }
                }  
@@ -205,10 +244,10 @@ class Prueba {
       
      function  KmRecorido($fechaI, $fechaF)
      {
-        $fecha  = date_create($fechaI);    
-        $fecha1 = date_timestamp_get($fecha)+21600;
-        $fecha2 = date_create($fechaF);
-        $fecha3 = date_timestamp_get($fecha2)+64800;
+       $fe= strtotime($fechaI);
+       $fechaIn = $fe+25200;
+       $fef=strtotime($fechaF);
+       $fechafi = $fef+25200;
         $wialon_api = new Wialon();
         $result = $wialon_api -> login($this->token);
         $json =json_decode($result, true);
@@ -238,8 +277,8 @@ class Prueba {
                 $params=array(
                   'layerName'=>'Unidad',       //Nombre  de la capa
                   'itemId'=>$id,               //Id de la unidad  cuyo mensajes se solicitaran
-                  'timeFrom'=>$fecha1,         //Comienzo del intervalo
-                  'timeTo'=>$fecha3,           //Final del intervalo
+                  'timeFrom'=>$fechaIn,         //Comienzo del intervalo
+                  'timeTo'=>$fechafi,           //Final del intervalo
                   'tripDetector'=>1,           //Usa detector del viaje 0 = no, 1 = si 
                   'trackColor'=>'trip',        //Color de la Pista en formato ARGB
                   'trackWidth'=>2,             //Anchura de la línea de seguimiento en píxeles
@@ -272,10 +311,11 @@ class Prueba {
 
      function  Posicion1($user, $fechaI, $fechaF)
      {
-        $fecha  = date_create($fechaI);    
-        $fecha1 = date_timestamp_get($fecha)+21600;
-        $fecha2 = date_create($fechaF);
-        $fecha3 = date_timestamp_get($fecha2)+64800;
+
+        $fe= strtotime($fechaI);
+        $fechaIn = $fe+25200;
+        $fef=strtotime($fechaF);
+        $fechafi = $fef+25200;
         $wialon_api = new Wialon();
         $result = $wialon_api -> login($this->token);
         $json =json_decode($result, true);
@@ -303,8 +343,8 @@ class Prueba {
 
                  $params=array(
                   'itemId'=>$id,            //Id de unidad o recurso
-                  'timeFrom'=>$fecha1,      //Comienzo de intervalo, fecha en unix
-                  'timeTo'=>$fecha3,        //Final de intervalo, fecha en unix
+                  'timeFrom'=>$fechaIn,      //Comienzo de intervalo, fecha en unix
+                  'timeTo'=>$fechafi,        //Final de intervalo, fecha en unix
                   'flags'=>0x0000,          //Bandera para cargar mensajes
                   'flagsMask'=>0x0000,      //Mascara
                   'loadCount'=>0xffffffff   //Cuántos mensajes devolver
@@ -315,12 +355,16 @@ class Prueba {
                 {  
               
                  foreach($posicion['messages'] as $rows)
-                 {
+                 {  $unixf = $rows['t']-25200; 
+                    $unix = date('d-m-y H:i:S', $unixf);
                     $posicionY = $rows['pos']['y'];
                     $posicionX = $rows['pos']['x'];
                     $array [] = array(
+                      
                       'id' => $row['id'],
                       'user' => $row['nm'],
+                      'fechaunix' =>$rows['t'],
+                      'fecha' => $unix,
                       'PosicionY' => $posicionY,
                       'PosicionX' => $posicionX
                      );

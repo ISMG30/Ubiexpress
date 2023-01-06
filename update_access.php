@@ -21,7 +21,7 @@ if(!isset($json['error'])){
     //print_r($json['user']);
     //echo $wialon_api->core_get_hw_types();
     $params = array(
-      'unitId'=> 341,                 //Identificación  de la unidad
+      'unitId'=> 302,                 //Identificación  de la unidad
       'sensores'=> 1,                 //Matriz de ID de sensores
       'flags' => 0x01                 //Bandera
       ); 

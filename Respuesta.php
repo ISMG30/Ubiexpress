@@ -7,7 +7,9 @@ if(!empty($_POST['opcion'])){
    
    switch($opcion){
     case 1: {
-          $dato = $Ubi->login();
+          $fechai=$_POST['fechai'];
+          $fechaf=$_POST['fechaf'];
+          $dato = $Ubi->login($fechai, $fechaf);
           
          
     }
