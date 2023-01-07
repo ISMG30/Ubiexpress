@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title> INSERTAR MAPA EN GOOGLE MAPS</title>
+<head>
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+ <!--script src="http://maps.googleapis.com/maps/api/js"> </script-->
+ <script src="http://creativecommons.org/licenses/by-sa/2.0/"></script>
+ <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+ integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+ crossorigin=""></script>
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+    <!--div id="map" style="width:1000px; height: 800px; border: solid; border-color: #00FFFF  "></div-->
+    <div id="map" style="height: 580px; width: 580px;"></div>
+   
+  </body>
+
+ <script>
+    var map;
+
+ /*function init(){
+    var mapOption = {
+     center: new google.maps.LatLng(18.4578350067,-97.379520003),
+     zoom: 15,
+     mapTypeId:google.maps.MapTypeId.ROADMAP
+    };
+   var map = new google.maps.Map(document.getElementById("map"),mapOption);
+
+  }
+
+  google.maps.event.addDomListener(window, 'load', init);*/
+    map=L.map('map').setView([18.4578350067, -97.379520003], 16);
+   /*L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);*/
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+    maxZoom: 30
+    }).addTo(map);
+
+    L.marker([18.457981, -97.380343]).addTo(map)
+    .bindPopup('Abarrotera Hidalgo')
+    .openPopup();
+
+function init_map() {
+    // create a map in the "map" div, set the view to a given place and zoom 18°27'28.9"N 97°22'48.5"W
+    map = L.map('map').setView([18.458067, -97.380115], 16);
+	var sess = wialon.core.Session.getInstance(); // get instance of current Session	
+    // add WebGIS tile layer
+	L.tileLayer(sess.getBaseGisUrl("render") + "/gis_render/{x}_{y}_{z}/" + sess.getCurrUser().getId() + "/tile.png", {
+		zoomReverse: true, 
+		zoomOffset: -1
+	}).addTo(map);
+    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+maxZoom: 30
+}).addTo(map);
+}
+ </script>
+
+
+  </head-->
+</html>﻿
