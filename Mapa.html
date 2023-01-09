@@ -21,50 +21,13 @@
    
   </body>
 
- <script>
-    var map;
-
- /*function init(){
-    var mapOption = {
-     center: new google.maps.LatLng(18.4578350067,-97.379520003),
-     zoom: 15,
-     mapTypeId:google.maps.MapTypeId.ROADMAP
-    };
-   var map = new google.maps.Map(document.getElementById("map"),mapOption);
-
-  }
-
-  google.maps.event.addDomListener(window, 'load', init);*/
-    map=L.map('map').setView([18.4578350067, -97.379520003], 16);
-   /*L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);*/
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ <script src="Rutas.js">
+  /*var map;
+  map=L.map('map').setView([18.4578350067, -97.379520003], 16);
+  L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
     maxZoom: 30
-    }).addTo(map);
-
-    L.marker([18.457981, -97.380343]).addTo(map)
-    .bindPopup('Abarrotera Hidalgo')
-    .openPopup();
-
-function init_map() {
-    // create a map in the "map" div, set the view to a given place and zoom 18°27'28.9"N 97°22'48.5"W
-    map = L.map('map').setView([18.458067, -97.380115], 16);
-	var sess = wialon.core.Session.getInstance(); // get instance of current Session	
-    // add WebGIS tile layer
-	L.tileLayer(sess.getBaseGisUrl("render") + "/gis_render/{x}_{y}_{z}/" + sess.getCurrUser().getId() + "/tile.png", {
-		zoomReverse: true, 
-		zoomOffset: -1
-	}).addTo(map);
-    L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-maxZoom: 30
-}).addTo(map);
-}
+    }).addTo(map);*/
  </script>
-
-
-  </head-->
+  </head>
 </html>﻿

@@ -9,7 +9,7 @@ if(!empty($_POST['opcion'])){
    
     case 1: {
      
-        $dato = $Ubi ->Unidades($unidad);
+        $dato = $Ubi ->Unidades();
     }
     ;
     break;
@@ -22,9 +22,10 @@ if(!empty($_POST['opcion'])){
     ;
     break;
     case 3:{
+        $unidad=$_POST['unidad'];
         $fechaI=$_POST['fechai'];
         $fechaF=$_POST['fechaf'];
-        $dato =$Ubi-> KmRecorido($fechaI, $fechaF);
+        $dato =$Ubi-> KmRecorido($fechaI, $fechaF, $unidad);
     }
     ;
     break;
@@ -33,6 +34,12 @@ if(!empty($_POST['opcion'])){
          $fechaI = $_POST['fechai'];
          $fechaF = $_POST['fechaf'];
          $dato =$Ubi->Posicion1($user, $fechaI, $fechaF);
+     }
+     ;
+     break;
+     case 5:{
+
+        $dato = $Ubi->Coordenadas();
      }
      ;
      break;

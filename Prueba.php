@@ -3,11 +3,12 @@
 include_once 'wialon.php';
 
 class Prueba {
+  
+  
+
+   //var $token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+   //var $token ='2f0a8929ad515bb67157ead976434d5832024D2B6FDD58B2372D512352E484120DED7575';
    
-   
-     
-   //var $token ='9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-   var $token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
     
    function __construct()
     {
@@ -114,7 +115,7 @@ class Prueba {
       }
     
       
-     function  KmRecorido($fechaI, $fechaF)
+     function  KmRecorido($fechaI, $fechaF, $unidad)
      {
        $fe= strtotime($fechaI);
        $fechaIn = $fe+25200;              
@@ -244,9 +245,42 @@ class Prueba {
                   
                 } 
               }  
-                 echo json_encode($array);
+                header('Content-Type: Rutas.js'); 
+                echo json_encode($array);     
           }
         }
       }     
+      function Coordenadas()
+      {
+               $data[] = array(
+                "id" => "1",
+                "unidad" => "hidalguin",
+                "posicionY"=>18.457885011,
+                "posicionX"=>-97.3794599851
+               );
+               $data[] = array(
+                "id" => "1",
+                "unidad" => "hidalguin",
+                "posicionY"=>18.4578666687,
+                "posicionX"=>-97.3796066602
+               );
+               
+               $result = array(
+                "sEcho" => 1,
+                "iTotalRecords" => count($data),
+                "iTotalDisplayRecords" => count($data),
+                "aaData" => $data
+               );
+               
+               $resul1=$data+$data;
+    
+            header('Content-Type: Rutas.js');
+               echo json_encode($resul1);
+               $coo=json_encode($resul1);
+               return $coo;
+            
+      }
 }
+
+ 
 ?>

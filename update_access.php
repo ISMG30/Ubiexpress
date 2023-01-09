@@ -1,10 +1,9 @@
 <?php
 include('wialon.php');
 $wialon_api =new Wialon();
-//$token = '9184acef7671d237a45f10b8cf35cb44C6A74782B34BE66620F9280CC80D54237ED69E7D';
-$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
-$result = $wialon_api->login($token);
-//$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
+//$token ='2f0a8929ad515bb67157ead976434d583BCAEAF887B0551E3F8C07590A59533902946CAA';
+//$result = $wialon_api->login($token);
+$result = $wialon_api->login('PROGRAMACION','PRUEBAS12');
 //$result = $wialon_api->login($result);
 $json = json_decode($result, true);
 if(!isset($json['error'])){
@@ -13,7 +12,7 @@ if(!isset($json['error'])){
     //echo "<br>$userId<br>"; 
    //echo $result;
  $params= array();
- echo $wialon_api->core_logout(json_encode($params));
+ //echo $wialon_api->core_logout(json_encode($params));
   // echo $wialon_api->core_get_account_data('{"type":1}');
    //echo $wialon_api->core_search_item('{"id":440,"flags": 0x1}');
     
@@ -523,59 +522,14 @@ if(!isset($json['error'])){
       'annotations'=>0,
       'flags'=>0x0001
     );
-      //echo $wialon_api->render_create_messages_layer(json_encode($params));
+    echo $wialon_api->render_create_messages_layer(json_encode($params));
 
-
-
- $array =array(
-   'id'=> 302,
-   'user'=>'C. ROJA SN-75-866',
-   'km'=>'29001',
-   
- );
- $array1 =array(
-
-  'Combustible' => '56',
-  'Km/h'=>0
- );
-$array2 =array(
-  'id'=> 302,
-  'user'=>'C. ROJA SN-75-866',
-  'km'=>'29001',
-  
-);
-$array3 =array(
-
- 'Combustible' => '56',
- 'Km/h'=>0
-);
- 
-$arfinal[] =array(
-  $array,
-  $array1,
-  '3'=>$array2,
-  '4'=>$array3,
- 
-);
-$final1=array($array+$array1);
- //$final = array_merge($array, $array1);
-//echo json_encode($final1);
- $arr = array('Name' => 'Test', 
-            'Age' => 24, 
-            'Email' => 'test@gmail.com'); 
-$arr1 = array('Name' => 'Test', 
-            'Age' => 24, 
-            'Email' => 'test@gmail.com'); 
-$final=array($arr ,
- $arr1);
 //echo json_encode($arfinal)."\n";
 
                 //echo Datetime("y-m-d h:i:s ",$fecha),'<br>';
-                 //$fecha1 = new DateTime($fecha);
-               // $fecha1->format("Y-m-d H:m:s");
-                 //echo $fecha1;
-                 
-       
+                //$fecha1 = new DateTime($fecha);
+                // $fecha1->format("Y-m-d H:m:s");
+                //echo $fecha1;
                 //$timestamp = $date->getTimestamp();
                 //$timestamp=strtotime($fechaI);
                 //  $timestamp=mktime('12:13:00');
