@@ -1,10 +1,11 @@
 <?php
 include_once "Prueba.php";
+include_once "Json.php";
 
 if(!empty($_POST['opcion'])){
    $opcion = $_POST['opcion'];
    $Ubi = new Prueba ();
-   
+   $db =new Json();   
    switch($opcion){
    
     case 1: {
@@ -40,6 +41,13 @@ if(!empty($_POST['opcion'])){
      case 5:{
 
         $dato = $Ubi->Coordenadas();
+     }
+     ;
+     break;
+
+     case 6:{
+
+        $dato = $db->Insercion();
      }
      ;
      break;

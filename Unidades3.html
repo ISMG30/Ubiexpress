@@ -11,7 +11,7 @@
 
 <p>Select unit: <span id="units"></span></p>
 <div id="log"></div>
-			<form action="Respuesta.php" method="post">
+		<!--	<form action="Respuesta.php" method="post">
 				<h4> Unidades</h4>
 				<pre class="prettyprint">
 					<code>
@@ -50,7 +50,7 @@
 				<div>Unidad<input type="text" name="unidad" value="C. ROJA SN-75-866"></div>
 				<div>De: <input type="datetime-local" name="fechai" value="15-12-2022 09:00 a.m."></div>
 				<div>A:  <input type="datetime-local" name="fechaf" value="15-12-2022 12:00 p.m."></div>
-				<!--div>Unidades<select type="textbox" name="unidad"></div-->
+				<!--div>Unidades<select type="textbox" name="unidad"></div->
 				<div><button class="subit">OBTENER JSON co</div>
 			</form>
 			<form action="Respuesta.php" method="post">
@@ -82,6 +82,19 @@
 					</code>
 				</pre>
 				<div><input type="hidden" name="opcion" value="5"></div>
+				<div><button class="subit">OBTENER JSON co</div>
+			</form>-->
+
+			<form action="Respuesta.php" method="post">
+				<h4> Inserta a la base datos </h4>
+				<pre class="prettyprint">
+					<code>
+						method="post"
+						name="opcion" value="6"
+						
+					</code>
+				</pre>
+				<div><input type="hidden" name="opcion" value="6"></div>
 				<div><button class="subit">OBTENER JSON co</div>
 			</form>
 <script>
