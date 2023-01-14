@@ -37,7 +37,7 @@
      foreach ($datosclientes as $cliente)
      {
         $consulta ="(id_Unidad, Unidad, combustible, km) VALUES('".$cliente['id']."','".$cliente['user']."','".$cliente['com']."','".$cliente['km']."')";
-        $datof = $modelo->Insertar2("ubiexpress",$consulta);
+        $datof = $modelo->Insertar("ubiexpress",$consulta);
         if($datof){
          echo  "Registro";
         }else{

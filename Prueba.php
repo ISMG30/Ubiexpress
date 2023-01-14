@@ -109,7 +109,7 @@ class Prueba {
                 }
                }  
               }
-                echo json_encode($array); 
+                //echo json_encode($array); 
                 $resulf = json_encode($array);
                 return $resulf; 
           }

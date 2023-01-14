@@ -60,21 +60,23 @@
 
     //$json = '[{"id":"1","nombre":"Jose","edad":"25","genero":"masculino","email":"josegonzales9871@gmail.com","localidad":"Madrid","telefono":"912546524"},{"id":"2","nombre":"Juan","edad":"31","genero":"masculino","email":"juanrodriguez65465@gmail.com","localidad":"Barcelona","telefono":"934654654"},{"id":"3","nombre":"Antonio","edad":"43","genero":"masculino","email":"antoni654654@gmail.com","localidad":"Valencia","telefono":"214748366"},{"id":"4","nombre":"Angelina","edad":"35","genero":"femenino","email":"angelina654456@gmail.com","localidad":"New York","telefono":"247483647"}]';
    include 'Prueba.php';
+   include_once 'ModeloE.php';
+    $modelo = new ModeloE();
     $data =[];
     $data[] = array(
-      "id" => "341",
+      "id" => "41",
       "user" => "C. ROJA SN-75-862",
       "com" => "49.5",
       "km" => "28140"
      );
      $data[] = array(
-      "id" => "302",
+      "id" => "02",
       "user" => "C. ROJA SN-75-866",
       "com" => "48.5",
       "km" => "29569"
      );
      $data[] = array(
-      "id" => "103",
+      "id" => "03",
       "user" => "TRAILER CASCADIA SN-88-974",
       "com" => "220",
       "km" => "39760"
@@ -89,7 +91,6 @@
      echo json_encode($result);
      $jsone = json_encode($result);
 
-     $jsonr =json_decode($resulf);
     
     $json ='[{"id":"341","user":"C. ROJA SN-75-862","com":"49.5","km":"28140"},
              {"id":302,"user":"C. ROJA SN-75-866","com":"48.5","km":"29569"},
@@ -97,7 +98,7 @@
              {"id":"325","user":"TRAILER CASCADIA SN-99-983","com":"120","km":"23585"},
              {"id":"341","user":"C. ROJA SN-75-862","com":"49.5","km":"28140"}]';
     
-    $datosclientes = json_decode($jsonr, true);
+    $datosclientes = json_decode($jsone, true);
     
     
     $server = "localhost";
@@ -116,8 +117,14 @@
            {
              mysqli_query($conexion, $insertar);
            }*/
-        
-      mysqli_query($conexion, "INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('".$cliente['id']."','".$cliente['user']."','".$cliente['com']."', '".$cliente['km']."')");
+        $datos = "(id_Unidad, Unidad, combustible, km) VALUES('".$cliente['id']."','".$cliente['user']."','".$cliente['com']."','".$cliente['km']."')";
+        $consulta =$modelo->Insertar2("ubiexpress",$consulta);
+        if($datof){
+         echo  "Registro";
+        }else{
+         echo "error";
+        }
+      //mysqli_query($conexion, "INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('".$cliente['id']."','".$cliente['user']."','".$cliente['com']."', '".$cliente['km']."')");
     }
     
    

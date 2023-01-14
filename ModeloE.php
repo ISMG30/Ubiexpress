@@ -9,17 +9,8 @@
            
         }
 
-        public function Insertar($insertar) 
-        {
-            $reuslt = $this->db->query($insertar);
-            if($reuslt)
-            {
-                return true;
-            }else{
-                return false;
-            }
-        } 
-        public function Insertar2($tabla, $consulta)
+        
+        public function Insertar($tabla, $consulta)
         {
             $consulta1= "insert into " . $tabla . " " . $consulta. "";
             echo "- $consulta1";
