@@ -51,6 +51,7 @@ $data[] = array(
        // $Insert =$modelo->Insertar("ubiexpress",$dato);
       
         //mysqli_query($conexion, "INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('".$cliente['id']."','".$cliente['user']."','".$cliente['com']."', '".$cliente['km']."')");
-     }
+    
+      }
      
 ?>
