@@ -207,12 +207,14 @@ class Request{
 
     function getInsert()
     {  
-       $query ="INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('302', 'C. Rojo', '85.23','236535')";
-        $resu = mysqli_query(cnx, $query);
-        if($resu){
-            echo "Se registro";
+        $sql="INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('302', 'C. Rojo SN-52-235', '85.23','236535')";
+        $resu = $this ->cnx->prepare($sql);
+        $resu -> execute();
+        if($resu)
+        {
+            echo "Registro";
         }else{
-            echo "error";
+            echo "Error";
         }
         /*$d= $this ->prueba-> CombustibleKmtotal();
         $dato =json_decode($d); 

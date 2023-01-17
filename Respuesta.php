@@ -1,11 +1,15 @@
 <?php
-include_once "Prueba.php";
-include_once "Json.php";
+//include_once "Prueba.php";
+//include_once "Json.php";
+include_once "./Ubi/Inserta.php";
+include_once "./Ubi/Request.php";
 
 if(!empty($_POST['opcion'])){
    $opcion = $_POST['opcion'];
-   $Ubi = new Prueba ();
-   $db =new Json();   
+   //$Ubi = new Prueba ();
+  // $db =new Json();   
+   $I =new Inser();
+   $f =new Request();
    switch($opcion){
    
     case 1: {
@@ -51,6 +55,19 @@ if(!empty($_POST['opcion'])){
      }
      ;
      break;
+     case 8:{
+
+        $dato = $I->Inserter();
+     }
+     ;
+     break;
+     case 7:{
+
+        $dato = $f->getInsert();
+     }
+     ;
+     break;
+
    }
 }
 ?>
