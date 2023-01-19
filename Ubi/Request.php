@@ -1,7 +1,8 @@
 <?php 
 //require "conectionDB.php";
 require "conexion.php";
-require "../Prueba.php";
+//require "../Prueba.php";
+include_once "Prueba.php";
 
 class Request{
     public $cnx;
@@ -207,39 +208,22 @@ class Request{
 
     function getInsert()
     {  
-        $sql="INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('302', 'C. Rojo SN-52-235', '85.23','236535')";
-        $resu = $this ->cnx->prepare($sql);
-        $resu -> execute();
-        if($resu)
-        {
-            echo "Registro";
-        }else{
-            echo "Error";
-        }
-        /*$d= $this ->prueba-> CombustibleKmtotal();
-        $dato =json_decode($d); 
-        $cnx2 =$this->cnx = "INSERT INTO ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('302', 'C. Rojo', '85.23','236535')";
-        //$this ->cnx->$cnx;
-          if($cnx2)                                             
-          {
-            echo "resgistro";
-          }else // No se pueden perder de nuevo programa de una optica familiar
-           {
-            echo "error";
-           }
+        
+        $d= $this ->prueba-> CombustibleKmtotal();
+        $dato =json_decode($d, true); 
         foreach ($dato as $cliente)
-       {
-          //$query =" INSERT INTO  ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('".$cliente['id']."', '".$cliente['user']."', '".$cliente['com']."','".$cliente['km']."')";
-          $query =" INSERT INTO  ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('302', 'C. Rojo', '85.23','236535')";
-          //$result = $this -> cnx->prepare($query);
-          if($query)
+        {
+          $query =" INSERT INTO  ubiexpress(id_Unidad, Unidad, combustible, km) VALUES ('".$cliente['id']."', '".$cliente['user']."', '".$cliente['com']."','".$cliente['km']."')";
+          $result = $this -> cnx->prepare($query);
+          $result -> execute();
+          if($result)
           {
             echo "resgistro";
           }else
            {
             echo "error";
            }
-       }*/
+       }
     }
 
     

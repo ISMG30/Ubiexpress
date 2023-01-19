@@ -13,6 +13,7 @@ class PDF extends FPDF{
     {
         $my = conectObj();
         $sql = "select id, id_Unidad, Unidad, combustible, km from ubiexpress order by id";
+        
         $stm = $my->prepare($sql);
         $stm->execute();
         $stm ->bind_result($id,$Id_Usuario, $Unidad, $Combustible, $km);
@@ -69,5 +70,8 @@ class PDF extends FPDF{
         }else{
             die("Error: no se encontro el archivo '$file'");
         }
+    }
+    if(empty($_GET['Descargar'])){
+
     }
 ?>

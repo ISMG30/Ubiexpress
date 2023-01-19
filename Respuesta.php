@@ -1,14 +1,14 @@
 <?php
 //include_once "Prueba.php";
 //include_once "Json.php";
-include_once "./Ubi/Inserta.php";
+//include_once "./Ubi/Inserta.php";
 include_once "./Ubi/Request.php";
 
 if(!empty($_POST['opcion'])){
    $opcion = $_POST['opcion'];
-   //$Ubi = new Prueba ();
+   $Ubi = new Prueba ();
   // $db =new Json();   
-   $I =new Inser();
+   //$I =new Inser();
    $f =new Request();
    switch($opcion){
    
@@ -67,6 +67,12 @@ if(!empty($_POST['opcion'])){
      }
      ;
      break;
+     case 9:{
+
+      $dato = $Ubi-> Coordenadas();
+      }
+      ;
+      break;
 
    }
 }
