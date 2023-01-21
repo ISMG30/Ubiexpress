@@ -114,7 +114,7 @@ function init() { // Execute after login succeed
 		    if (!units || !units.length){ msg("No se encontraron unidades"); return; } // check if units found
 		    for (var i = 0; i< units.length; i++) // construct Select list using found resources
 			    $("#units").append("<option value='"+ units[i].getId() +"'>"+ units[i].getName()+ "</option>");
-		    $("#build").click( show_track );  // bind action to select change event
+		    $("#build").click(show_track);  // bind action to select change event
 			$("#tracks").on("click", ".close_btn", delete_track); //click, when need delete current track
 			$("#tracks").on("click", ".unit", focus_track); //click, when need to see any track
 	});
@@ -145,8 +145,7 @@ function show_track() {
 
 		// callback is performed, when messages are ready and layer is formed
 		callback =  qx.lang.Function.bind(function(code, layer) {
-			if (code) { msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
-			
+			if (code) {msg(wialon.core.Errors.getErrorText(code)); return; } // exit if error code
 			if (layer) { 
 				var layer_bounds = layer.getBounds(); // fetch layer bounds
 				if (!layer_bounds || layer_bounds.length != 4 || (!layer_bounds[0] && !layer_bounds[1] && !layer_bounds[2] && !layer_bounds[3])) // check all bounds terms
